@@ -1,20 +1,9 @@
-# Slimefun4 Addon
-This is an example Repository for a generic Slimefun4 Addon.
-In the top left is a button "Use this template", click this to create your own Addon for Slimefun4 using this basic template.
+# Wildernether
+Wildernether seeks to improve survivability in the nether by adding more food and tools that can be easily crafted in the nether
 
-## How to create your own addon.
-This is a template repository that you can use to create your own Slimefun4 Addon.<br>
-We have also written an extensive step-by-step tutorial which you can find here:<br>
-https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide
+## Gathering Resources
+The main method to gether resources in Wildernether is by right-clicking nether plants with hoes. Different tiered hoes have different levels of efficacy, with 
+wood being the lowest, and netherrite being the best. Wildernether also adds a Gilded Blackstone Hoe that performs better than diamond, but worse than netherrite.
 
-## Changing some important things
-Navigate to `src/main/java` and rename the package and the .java File to your liking.<br>
-Suggestion: "me.yourname.yourproject" (all lower case) and "ProjectName.java"<br>
-Example: "me.thebusybiscuit.cooladdon" and "CoolAddon.java"
-
-Navigate to `src/main/resources/plugin.yml` and change the "author" and "main" attributes.
-You may also want to change the description to something meaningful.
-
-Navigate to `pom.xml` and change the group id to "me.%Your name%" and change the artifact id to the name of your Project.
-
-After that you are good to go, you can now start developing your own Addon for Slimefun4.
+## Cuisine
+Wildernether food can be made in the Enhanced Crafting Table, or in the Nether Pot.
