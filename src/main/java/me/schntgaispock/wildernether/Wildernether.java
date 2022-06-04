@@ -1,15 +1,20 @@
 package me.schntgaispock.wildernether;
 
+import java.util.Random;
+
 import javax.annotation.Nonnull;
 
 import org.bukkit.NamespacedKey;
 
 import io.github.mooy1.infinitylib.core.AbstractAddon;
+import me.schntgaispock.wildernether.slimefun.listeners.Listeners;
 import me.schntgaispock.wildernether.slimefun.managers.ItemManager;
 
 public class Wildernether extends AbstractAddon {
 
     private static Wildernether instance;
+
+    private final Random random = new Random();
 
     public Wildernether() {
         super("SchnTgaiSpock", "Wildernether", "master", "auto-update");
@@ -17,6 +22,10 @@ public class Wildernether extends AbstractAddon {
 
     public static Wildernether getInstance() {
         return instance;
+    }
+
+    public Random getRandom() {
+        return this.random;
     }
 
     @Override
@@ -28,6 +37,7 @@ public class Wildernether extends AbstractAddon {
         getLogger().info("#=======================================#");
 
         ItemManager.setup();
+        Listeners.setup();
     }
 
     @Override

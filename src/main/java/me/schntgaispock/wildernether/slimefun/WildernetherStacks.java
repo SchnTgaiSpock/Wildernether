@@ -10,18 +10,22 @@ public class WildernetherStacks {
     public static final CustomItemStack GUIDE_WILDERNETHER, GUIDE_MATERIALS, GUIDE_PLANTS, GUIDE_CUISINE, 
         GUIDE_TOOLS, GUIDE_MACHINES;
     
-    public static final CustomItemStack RECIPE_BREAK_NETHER_PLANTS;
+    public static final CustomItemStack RECIPE_BREAK_NETHER_PLANTS, RECIPE_BLACKSTONE_STOVE_OVEN, RECIPE_BLACKSTONE_STOVE_FRYING, RECIPE_BLACKSTONE_STOVE_SOUP;
 
 
     public static final SlimefunItemStack CRIMSON_FRAME, WARPED_FRAME, SOUL_STONE;
 
-    public static final SlimefunItemStack BLACKSTONE_SCYTHE, SOUL_SCYTHE, NETHER_COMPOSTER;
+    public static final SlimefunItemStack BLACKSTONE_SCYTHE, SOUL_SCYTHE, NETHER_COMPOSTER, BLACKSTONE_STOVE;
 
     public static final SlimefunItemStack WARPED_CACTUS, BLAZESPROUT, NETHER_TUBERS, CRYSTAL_MUSHROOM,
         SHROOMLIGHT_SPORES, CRIMSON_DREADLOCKS, WARPED_ROSE, TWISTED_BEAN_SPROUT, RED_SPIDER_LILY, WARPED_LOTUS;
     public static final SlimefunItemStack GARDEN_OF_THE_LOST_SOUL, TULIP_OF_PARTINGS, BLOOM_OF_UNHEARD_CRIES,
     BLOSSOM_OF_SOLITUDE, LAMENT_OF_THE_DAMNED;
 
+    public static final SlimefunItemStack CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT;
+    public static final SlimefunItemStack BAKED_NETHER_TUBERS;
+    public static final SlimefunItemStack NETHER_CHIPS, FRIED_WARPED_FUNGUS, FRIED_CRIMSON_FUNGUS;
+    
     static {
         GUIDE_WILDERNETHER = new CustomItemStack(
             Material.WARPED_ROOTS,
@@ -55,7 +59,43 @@ public class WildernetherStacks {
 
         RECIPE_BREAK_NETHER_PLANTS = new CustomItemStack(
             Material.NETHER_SPROUTS,
-            Theme.LORE.getColor() + "Break Nether Plants",
+            "&bBreak Nether Plants",
+            "",
+            Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
+            Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
+            Theme.LORE.getColor() + "scythe. The available plants are Nether Sprouts,",
+            Theme.LORE.getColor() + "Warped Roots, Warped Fungus, Twisting Vines,",
+            Theme.LORE.getColor() + "Crimson Root, Crimson Fungus, Weeping Vines,",
+            Theme.LORE.getColor() + "and Shroomlight"
+        );
+
+        RECIPE_BLACKSTONE_STOVE_OVEN = new CustomItemStack(
+            Material.BLAST_FURNACE,
+            "&bBlackstone Stove (Oven)",
+            "",
+            Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
+            Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
+            Theme.LORE.getColor() + "scythe. The available plants are Nether Sprouts,",
+            Theme.LORE.getColor() + "Warped Roots, Warped Fungus, Twisting Vines,",
+            Theme.LORE.getColor() + "Crimson Root, Crimson Fungus, Weeping Vines,",
+            Theme.LORE.getColor() + "and Shroomlight"
+        );
+
+        RECIPE_BLACKSTONE_STOVE_FRYING = new CustomItemStack(
+            Material.BLAST_FURNACE,
+            "&bBlackstone Stove (Frying)",
+            "",
+            Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
+            Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
+            Theme.LORE.getColor() + "scythe. The available plants are Nether Sprouts,",
+            Theme.LORE.getColor() + "Warped Roots, Warped Fungus, Twisting Vines,",
+            Theme.LORE.getColor() + "Crimson Root, Crimson Fungus, Weeping Vines,",
+            Theme.LORE.getColor() + "and Shroomlight"
+        );
+
+        RECIPE_BLACKSTONE_STOVE_SOUP = new CustomItemStack(
+            Material.BLAST_FURNACE,
+            "&bBlackstone Stove (Soup)",
             "",
             Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
             Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
@@ -96,7 +136,7 @@ public class WildernetherStacks {
         BLACKSTONE_SCYTHE = new SlimefunItemStack(
             "BLACKSTONE_SCYTHE",
             Material.STONE_HOE,
-            "&fBlackstone Scythe",
+            Theme.BLACKSTONE.getColor() + "Blackstone Scythe",
             "",
             Theme.LORE.getColor() + "Its extra-sharp blade makes it perfect",
             Theme.LORE.getColor() + "for cutting the tough plants that grow",
@@ -124,6 +164,15 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "the hardiest of plants"
         );
 
+        BLACKSTONE_STOVE = new SlimefunItemStack(
+            "BLACKSTONE_STOVE",
+            Material.BLAST_FURNACE,
+            Theme.BLACKSTONE.getColor() + "Blackstone Stove",
+            "",
+            Theme.LORE.getColor() + "Using the stone of the nether, it is",
+            Theme.LORE.getColor() + "able to keep itself lit forever!"
+        );
+
         WARPED_CACTUS = new SlimefunItemStack(
             "WARPED_CACTUS",
             Material.CACTUS,
@@ -139,7 +188,7 @@ public class WildernetherStacks {
             Material.RED_DYE,
             Theme.CRIMSON.getColor() + "Blazesprout",
             "",
-            Theme.LORE.getColor() + "The hypha of a crimson fungus has",
+            Theme.LORE.getColor() + "The hypha of a nether fungus has",
             Theme.LORE.getColor() + "absorbed some powder from a blaze,",
             Theme.LORE.getColor() + "leading to the formation of a fiery",
             Theme.LORE.getColor() + "blister."
@@ -265,7 +314,7 @@ public class WildernetherStacks {
             "",
             Theme.LORE.getColor() + "After days of walking, the adventurer",
             Theme.LORE.getColor() + "could move no longer. He collapsed on the",
-            Theme.LORE.getColor() + "brown sand, crimson blood flowing from",
+            Theme.LORE.getColor() + "brown sand, scarlet blood flowing from",
             Theme.LORE.getColor() + "festering wounds. No more did he feel the",
             Theme.LORE.getColor() + "itch of a stinging scrape, nor the aching",
             Theme.LORE.getColor() + "of an empty stomach. Just the certainty",
@@ -280,10 +329,68 @@ public class WildernetherStacks {
             "",
             Theme.LORE.getColor() + "Once fiery brimstone, this land became",
             Theme.LORE.getColor() + "overgrown with the twisted forms of flora",
-            Theme.LORE.getColor() + "carried on the wind, mutated by time.",
-            Theme.LORE.getColor() + "However, no more could the adventurer be",
-            Theme.LORE.getColor() + "soothed, for his soul was damned to this",
-            Theme.LORE.getColor() + "strange land for the rest of eternity"
+            Theme.LORE.getColor() + "that flew on the wind, and mutated with",
+            Theme.LORE.getColor() + "time. However, no more could his soul be",
+            Theme.LORE.getColor() + "soothed, for he was damned to this",
+            Theme.LORE.getColor() + "unknown land for the rest of eternity"
+        );
+
+        CRIMSON_STEW = new SlimefunItemStack(
+            "CRIMSON_STEW",
+            Material.RABBIT_STEW,
+            Theme.CUISINE.getColor() + "Crimson Stew",
+            "",
+            Theme.LORE.getColor() + "A thick clump of fungus floats on the top.",
+            Theme.LORE.getColor() + "It should be safe to eat, right?"
+        );
+
+        WARPED_STEW = new SlimefunItemStack(
+            "WARPED_STEW",
+            Material.SUSPICIOUS_STEW,
+            Theme.CUISINE.getColor() + "Warped Stew",
+            "",
+            Theme.LORE.getColor() + "The surface of the soup shines green.",
+            Theme.LORE.getColor() + "It should be safe to eat, right?"
+        );
+
+        NETHER_HOTPOT = new SlimefunItemStack(
+            "NETHER_HOTPOT",
+            Material.MUSHROOM_STEW,
+            Theme.CUISINE.getColor() + "Nether Hotpot",
+            "",
+            Theme.LORE.getColor() + "Piping hot!"
+        );
+
+        BAKED_NETHER_TUBERS = new SlimefunItemStack(
+            "BAKED_NETHER_TUBERS",
+            Material.BAKED_POTATO,
+            Theme.CUISINE.getColor() + "Baked Nether Tubers",
+            "",
+            Theme.LORE.getColor() + "It's just a baked potato."
+        );
+
+        NETHER_CHIPS = new SlimefunItemStack(
+            "NETHER_CHIPS",
+            Material.BREAD,
+            Theme.CUISINE.getColor() + "Nether Chips™",
+            "",
+            Theme.LORE.getColor() + "You'll get fat if you eat too much"
+        );
+
+        FRIED_WARPED_FUNGUS = new SlimefunItemStack(
+            "FRIED_WARPED_FUNGUS",
+            Material.WARPED_FUNGUS,
+            Theme.CUISINE.getColor() + "Fried Warped Fungus",
+            "",
+            Theme.LORE.getColor() + "Crunchy!"
+        );
+
+        FRIED_CRIMSON_FUNGUS = new SlimefunItemStack(
+            "FRIED_CRIMSON_FUNGUS",
+            Material.CRIMSON_FUNGUS,
+            Theme.CUISINE.getColor() + "Fried Crimson Fungus",
+            "",
+            Theme.LORE.getColor() + "Crunchy!"
         );
     }
 }
