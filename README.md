@@ -5,7 +5,7 @@ Wildernether seeks to improve survivability in the nether by adding more food an
 The main method to gether resources in Wildernether is by breaking nether plants with Scythes. The plants that you can break are Nether Sprouts, Warped Roots, Warped Fungus, Twisting Vines, Crimson Roots, Crimson Fungus, Weeping Vines, and Shroomlight.
 
 ### Secret Plants
-Using the Soul Scythe, you have a chance to get 5 other secret plants. They have no use other than a collectible.
+Using the Soul Scythe, you have an increased chance to get 5 other secret plants. They have no use other than a collectible.
 
 ## Cuisine
 Wildernether food can be made in the Enhanced Crafting Table and the Blackstone Stove.
