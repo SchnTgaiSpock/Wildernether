@@ -12,9 +12,9 @@ Using the Soul Scythe, you have a chance to get 5 other secret plants. They have
 Wildernether food can be made in the Enhanced Crafting Table and the Blackstone Stove.
 
 ### Cooking in the Blackstone Stove
-The Blackstone Stove has three modes: Soup, Frying, and Oven. For soup mode, place a cauldron on top of the Stove. For Frying mode, place a Heavy Weighted Pressure Plate (Iron Pressure Plate) on top of the Stove. Oven mode is the default.
+The Blackstone Stove has three modes: Soup, Frying, and Oven. For soup mode, place a Cauldron on top of the Stove. For Frying mode, place a Heavy Weighted Pressure Plate (Iron Pressure Plate) on top of the Stove. Oven mode is the default.
 
-When using the correct mode and recipe, clicking on the "Cook" button in the Stove's menu will put the cooked item in the output slot. Items will stack up to 64, even if they are unstackables.
+When using the correct mode and recipe, clicking on the "Click to cook!" button in the Stove's menu will put the cooked item in the output slot.
 
 ### Reading the Stove recipes
-The top 6 slots in the Simefun Guide correspond to the 6 slots in the Stove. The middle bottom slot is the item in the bowl slot.
+The top 6 slots in the Simefun Guide correspond to the 6 slots in the Stove. The middle bottom slot is the item in the bowl slot for soup recipes.
