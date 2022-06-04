@@ -19,5 +19,5 @@ When using the correct mode and recipe, clicking on the "Click to cook!" button 
 The top 6 slots in the Simefun Guide correspond to the 6 slots in the Stove. The middle bottom slot is the item in the bowl slot for soup recipes.
 
 ## Credits
-*InfinityLib* by Mooy1
+*InfinityLib* by Mooy1<br>
 *Lombok* by Project Lombok
