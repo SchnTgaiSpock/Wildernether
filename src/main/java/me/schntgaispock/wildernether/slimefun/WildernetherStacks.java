@@ -1,10 +1,17 @@
 package me.schntgaispock.wildernether.slimefun;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.schntgaispock.wildernether.slimefun.util.Theme;
 import org.bukkit.Material;
 
 public class WildernetherStacks {
+
+    public static final CustomItemStack GUIDE_WILDERNETHER, GUIDE_MATERIALS, GUIDE_PLANTS, GUIDE_CUISINE, 
+        GUIDE_TOOLS, GUIDE_MACHINES;
+    
+    public static final CustomItemStack RECIPE_BREAK_NETHER_PLANTS;
+
 
     public static final SlimefunItemStack CRIMSON_FRAME, WARPED_FRAME, SOUL_STONE;
 
@@ -16,6 +23,49 @@ public class WildernetherStacks {
     BLOSSOM_OF_SOLITUDE, LAMENT_OF_THE_DAMNED;
 
     static {
+        GUIDE_WILDERNETHER = new CustomItemStack(
+            Material.WARPED_ROOTS,
+            Theme.CRIMSON.getColor() + "Wildernether"
+        );
+
+        GUIDE_MATERIALS = new CustomItemStack(
+            Material.MAGMA_CREAM,
+            Theme.LORE.getColor() + "Wildernether Materials"
+        );
+
+        GUIDE_TOOLS = new CustomItemStack(
+            Material.NETHERITE_HOE,
+            Theme.LORE.getColor() + "Wildernether Tools"
+        );
+
+        GUIDE_PLANTS = new CustomItemStack(
+            Material.CRIMSON_FUNGUS,
+            Theme.LORE.getColor() + "Nether Plants"
+        );
+        
+        GUIDE_CUISINE = new CustomItemStack(
+            Material.COOKED_PORKCHOP,
+            Theme.LORE.getColor() + "Nether Cuisine"
+        );
+
+        GUIDE_MACHINES = new CustomItemStack(
+            Material.CRIMSON_HYPHAE,
+            Theme.LORE.getColor() + "Wildernether Machines"
+        );
+
+        RECIPE_BREAK_NETHER_PLANTS = new CustomItemStack(
+            Material.NETHER_SPROUTS,
+            Theme.LORE.getColor() + "Break Nether Plants",
+            "",
+            Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
+            Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
+            Theme.LORE.getColor() + "scythe. The available plants are Nether Sprouts,",
+            Theme.LORE.getColor() + "Warped Roots, Warped Fungus, Twisting Vines,",
+            Theme.LORE.getColor() + "Crimson Root, Crimson Fungus, Weeping Vines,",
+            Theme.LORE.getColor() + "and Shroomlight"
+        );
+
+
         CRIMSON_FRAME = new SlimefunItemStack(
             "CRIMSON_FRAME",
             Material.CRIMSON_FENCE_GATE,
@@ -55,12 +105,13 @@ public class WildernetherStacks {
         
         SOUL_SCYTHE = new SlimefunItemStack(
             "SOUL_SCYTHE",
-            Material.STONE_HOE,
+            Material.GOLDEN_HOE,
             Theme.SOUL.getColor() + "Soul Scythe",
             "",
-            Theme.LORE.getColor() + "It's blade",
-            Theme.LORE.getColor() + "for cutting the tough plants that grow",
-            Theme.LORE.getColor() + "in the nether"
+            Theme.LORE.getColor() + "Its blade quivers with soft whispers.",
+            Theme.LORE.getColor() + "If you use this to harvest plants in the",
+            Theme.LORE.getColor() + "nether, you might discover plants with",
+            Theme.LORE.getColor() + "secrets to tell!"
         );
 
         NETHER_COMPOSTER = new SlimefunItemStack(

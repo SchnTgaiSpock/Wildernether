@@ -1,5 +1,9 @@
 package me.schntgaispock.wildernether;
 
+import javax.annotation.Nonnull;
+
+import org.bukkit.NamespacedKey;
+
 import io.github.mooy1.infinitylib.core.AbstractAddon;
 import me.schntgaispock.wildernether.slimefun.managers.ItemManager;
 
@@ -29,5 +33,9 @@ public class Wildernether extends AbstractAddon {
     @Override
     protected void disable() {
         instance = null;
+    }
+
+    public static NamespacedKey newNamespacedKey(@Nonnull String name) {
+        return new NamespacedKey(Wildernether.getInstance(), name);
     }
 }
