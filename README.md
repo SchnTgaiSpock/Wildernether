@@ -2,8 +2,7 @@
 Wildernether seeks to improve survivability in the nether by adding more food and tools that can be easily crafted in the nether
 
 ## Gathering Resources
-The main method to gether resources in Wildernether is by right-clicking nether plants with hoes. Different tiered hoes have different levels of efficacy, with 
-wood being the lowest, and netherrite being the best. Wildernether also adds a Blackstone Scythe that performs better than diamond, but worse than netherrite.
+The main method to gether resources in Wildernether is by breaking nether plants with Scythes. The plants that you can break are Nether Sprouts, Warped Roots, Warped Fungus, Twisting Vines, Crimson Roots, Crimson Fungus, Weeping Vines, and Shroomlight.
 
 ### Secret Plants
 Using the Soul Scythe, you have a chance to get 5 other secret plants. They have no use other than a collectible.
