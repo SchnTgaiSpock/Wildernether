@@ -10,6 +10,8 @@ import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.WildernetherGroups;
 import me.schntgaispock.wildernether.slimefun.WildernetherRecipes;
 import me.schntgaispock.wildernether.slimefun.WildernetherStacks;
+import me.schntgaispock.wildernether.slimefun.items.BlackstoneStove;
+import me.schntgaispock.wildernether.slimefun.items.Scythe;
 
 public class ItemManager {
 
@@ -55,14 +57,14 @@ public class ItemManager {
         );
 
         // ---------- Tools ----------
-        BLACKSTONE_SCYTHE = new SlimefunItem(
+        BLACKSTONE_SCYTHE = new Scythe(
             WildernetherGroups.TOOLS,
             WildernetherStacks.BLACKSTONE_SCYTHE,
             RecipeType.ENHANCED_CRAFTING_TABLE,
             WildernetherRecipes.BLACKSTONE_SCYTHE
         );
 
-        SOUL_SCYTHE = new SlimefunItem(
+        SOUL_SCYTHE = new Scythe(
             WildernetherGroups.TOOLS,
             WildernetherStacks.SOUL_SCYTHE,
             RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -76,7 +78,7 @@ public class ItemManager {
             WildernetherRecipes.NETHER_COMPOSTER
         );
 
-        BLACKSTONE_STOVE = new SlimefunItem(
+        BLACKSTONE_STOVE = new BlackstoneStove(
             WildernetherGroups.TOOLS,
             WildernetherStacks.BLACKSTONE_STOVE,
             RecipeType.ENHANCED_CRAFTING_TABLE,

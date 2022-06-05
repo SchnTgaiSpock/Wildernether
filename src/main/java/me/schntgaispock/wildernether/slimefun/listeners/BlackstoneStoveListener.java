@@ -1,32 +1,36 @@
 package me.schntgaispock.wildernether.slimefun.listeners;
 
 import java.util.Arrays;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 
 import org.bukkit.Bukkit;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.WildernetherRecipes;
 import me.schntgaispock.wildernether.slimefun.items.BlackstoneStove;
 import me.schntgaispock.wildernether.slimefun.items.BlackstoneStove.Mode;
 import me.schntgaispock.wildernether.slimefun.util.Theme;
+import me.schntgaispock.wildernether.slimefun.util.RecipeUtil.RecipeCollection;
+import me.schntgaispock.wildernether.slimefun.util.RecipeUtil.StoveRecipe;
 
 public class BlackstoneStoveListener implements Listener {
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onClick(@Nonnull InventoryClickEvent e) {
         ItemStack clickedItem = e.getCurrentItem();
         Logger logger = Wildernether.getInstance().getLogger();
+
 
         // Probably a better way to do this, pls tell me if you know
         if (
@@ -39,7 +43,7 @@ public class BlackstoneStoveListener implements Listener {
         }
 
         // Checks passed
-        Mode mode = Mode.valueOf(ChatUtils.removeColorCodes(clickedItem.getItemMeta().getLore().get(1))); // Second line of lore
+        Mode mode = Mode.valueOf(ChatUtils.removeColorCodes(clickedItem.getItemMeta().getLore().get(0).split(" ")[1])); // Second line of lore
 
         // Parse recipe, check if in existing recipes
         ItemStack[] currentRecipe = new ItemStack[9];
@@ -47,26 +51,26 @@ public class BlackstoneStoveListener implements Listener {
             int slot = BlackstoneStove.RECIPE_SLOTS[i];
             currentRecipe[i] = e.getInventory().getItem(slot);
         }
-        currentRecipe[8] = e.getInventory().getItem(BlackstoneStove.BOWL_SLOT);
+        currentRecipe[7] = e.getInventory().getItem(BlackstoneStove.BOWL_SLOT);
 
-        Set<ItemStack[]> recipeCategory;
+        RecipeCollection<StoveRecipe> recipeCollection;
         switch (mode) {
             case Frying:
-                recipeCategory = WildernetherRecipes.Recipes.BLACKSTONE_STOVE_FRYING;
+                recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_FRYING;
                 break;
                 
             case Soup:
-                recipeCategory = WildernetherRecipes.Recipes.BLACKSTONE_STOVE_SOUP;
+                recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_SOUP;
                 break;
 
             default:
-                recipeCategory = WildernetherRecipes.Recipes.BLACKSTONE_STOVE_OVEN;
+                recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_OVEN;
                 break;
         }
 
-        ItemStack recipeOutput = WildernetherRecipes.getOutput(currentRecipe, recipeCategory);
+        logger.log(Level.INFO, "About to try getOutput, recipeCollection: " + recipeCollection.toString());
+        ItemStack recipeOutput = recipeCollection.getOrNull(currentRecipe);
         if (recipeOutput == null) {
-            logger.log(Level.FINE, "Test fine message");
             logger.log(Level.INFO, "Could not find recipe for " + Arrays.toString(currentRecipe));
 
             e.getWhoClicked().sendMessage(Theme.CUISINE.getColor() + "Invalid " + mode.toString().toLowerCase() + " recipe!");
@@ -74,13 +78,14 @@ public class BlackstoneStoveListener implements Listener {
         }
 
         // Put output in output slot if there is space
-        int outputSlot = BlackstoneStove.GUI_OUTPUT_SLOTS[0];
+        int outputSlot = BlackstoneStove.OUTPUT_SLOT;
         ItemStack currentlyInOutput = e.getInventory().getItem(outputSlot);
+
         
         if (currentlyInOutput == null) {
             // Success
             e.getInventory().setItem(outputSlot, recipeOutput.clone());
-        } else if (currentlyInOutput.isSimilar(recipeOutput)) {
+        } else if (recipeOutput.isSimilar(currentlyInOutput)) {
             // Failure
             if (currentlyInOutput.getMaxStackSize() == currentlyInOutput.getAmount()) {
                 e.getWhoClicked().sendMessage(Theme.CUISINE.getColor() + "Output is full!");
@@ -91,13 +96,17 @@ public class BlackstoneStoveListener implements Listener {
         
         // Failure
         } else {
+            logger.log(Level.INFO, "currentlyInOutput: " + currentlyInOutput.toString());
+            logger.log(Level.INFO, "recipeOutput: " + recipeOutput.toString());
             e.getWhoClicked().sendMessage(Theme.CUISINE.getColor() + "Output is occupied!");
             return;
         }
 
         // Reduce input items by 1
         for (ItemStack item : currentRecipe) {
-            item.setAmount(item.getAmount() - 1);
+            if (item != null) {
+                item.setAmount(item.getAmount() - 1);
+            }
         }
     }
     

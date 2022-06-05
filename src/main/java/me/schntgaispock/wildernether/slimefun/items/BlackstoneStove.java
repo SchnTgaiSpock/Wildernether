@@ -4,6 +4,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.infinitylib.machines.MenuBlock;
@@ -13,7 +15,9 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import lombok.Getter;
 import lombok.Setter;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import me.schntgaispock.wildernether.slimefun.util.Theme;
 
 public class BlackstoneStove extends MenuBlock {
 
@@ -37,10 +41,11 @@ public class BlackstoneStove extends MenuBlock {
     public static final int BOWL_SLOT = 19;
     public static final int[] RECIPE_SLOTS = { 12, 13, 14, 21, 22, 23 };
     public static final int COOK_SLOT = GUI_COOK_SLOTS[0];
+    public static final int OUTPUT_SLOT = 25;
     public static final String COOK_CONFIRM_NAME = "Click to cook!";
 
-    public static final ItemStack BOWL_BORDER_ITEM = new CustomItemStack(Material.FIRE, "&9Bowl", "&7Only soup recipes need a bowl!");
-    public static final ItemStack RECIPE_BORDER_ITEM = new CustomItemStack(Material.FIRE, "&6Recipe");
+    public static final ItemStack BOWL_BORDER_ITEM = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE, "&9Bowl", "&7Only soup recipes need a bowl!");
+    public static final ItemStack RECIPE_BORDER_ITEM = new CustomItemStack(Material.CAMPFIRE, Theme.CUISINE.getColor() + "Recipe");
     
     @Getter
     @Setter
@@ -57,7 +62,7 @@ public class BlackstoneStove extends MenuBlock {
     }
 
     public static ItemStack getCraftConfirmItem(@Nonnull Mode mode) {
-        return new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE, "&6" + COOK_CONFIRM_NAME, "&7Mode:", "&f" + mode.toString());
+        return new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, "&a" + COOK_CONFIRM_NAME, "&7Mode: &f" + mode.toString());
     }
 
     @Override
@@ -71,11 +76,41 @@ public class BlackstoneStove extends MenuBlock {
 
     @Override
     protected int[] getInputSlots() {
-        return new int[0];
+        return new int[]{ 12, 13, 14, 21, 22, 23, 19 };
     }
 
     @Override
     protected int[] getOutputSlots() {
-        return new int[0];
+        return new int[]{ 25 };
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    protected void onNewInstance(BlockMenu menu, Block b) {
+        menu.addMenuOpeningHandler((Player player) -> {
+
+            if (b.getY() == 320) {
+                return;
+            }
+
+            Mode stoveMode = Mode.Oven;
+            Block blockOnTop = b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ());
+
+            switch (blockOnTop.getType()) {
+                case CAULDRON:
+                    stoveMode = Mode.Soup;
+                    break;
+
+                case HEAVY_WEIGHTED_PRESSURE_PLATE:
+                    stoveMode = Mode.Frying;
+                    break;
+            
+                default:
+                    break;
+            }
+
+            player.getOpenInventory().getTopInventory().setItem(49, getCraftConfirmItem(stoveMode));
+        });
+        super.onNewInstance(menu, b);
     }
 }

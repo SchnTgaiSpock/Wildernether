@@ -13,7 +13,7 @@ public enum Theme {
     CUISINE(ChatColor.of("#fcfc16")),
     BLACKSTONE(ChatColor.of("#55585b")),
 
-    LORE(ChatColor.of("#f0f0f0"));
+    LORE(ChatColor.of("#fcfbd6"));
 
     private final ChatColor color;
 

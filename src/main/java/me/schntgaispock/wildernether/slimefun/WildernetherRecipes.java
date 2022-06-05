@@ -1,18 +1,14 @@
 package me.schntgaispock.wildernether.slimefun;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.schntgaispock.wildernether.Wildernether;
-import me.schntgaispock.wildernether.slimefun.util.RecipeUtil;
+import me.schntgaispock.wildernether.slimefun.items.BlackstoneStove.Mode;
+import me.schntgaispock.wildernether.slimefun.util.RecipeUtil.StoveRecipe;
+import me.schntgaispock.wildernether.slimefun.util.RecipeUtil.RecipeCollection;
 
 public class WildernetherRecipes {
     
@@ -22,42 +18,47 @@ public class WildernetherRecipes {
             Wildernether.newNamespacedKey("break_nether_plants"), WildernetherStacks.RECIPE_BREAK_NETHER_PLANTS
         );
         public static final RecipeType BLACKSTONE_STOVE_OVEN = new RecipeType(
-            Wildernether.newNamespacedKey("break_nether_plants"), WildernetherStacks.RECIPE_BREAK_NETHER_PLANTS
+            Wildernether.newNamespacedKey("blackstone_stove_oven"), WildernetherStacks.RECIPE_BLACKSTONE_STOVE_OVEN
         );
         public static final RecipeType BLACKSTONE_STOVE_FRYING = new RecipeType(
-            Wildernether.newNamespacedKey("break_nether_plants"), WildernetherStacks.RECIPE_BREAK_NETHER_PLANTS
+            Wildernether.newNamespacedKey("blackstone_stove_frying"), WildernetherStacks.RECIPE_BLACKSTONE_STOVE_FRYING
         );
         public static final RecipeType BLACKSTONE_STOVE_SOUP = new RecipeType(
-            Wildernether.newNamespacedKey("break_nether_plants"), WildernetherStacks.RECIPE_BREAK_NETHER_PLANTS
+            Wildernether.newNamespacedKey("blackstone_stove_soup"), WildernetherStacks.RECIPE_BLACKSTONE_STOVE_SOUP
         );
     }
 
-    public static class Recipes {
 
-        public static final Set<ItemStack[]> BLACKSTONE_STOVE_OVEN = new HashSet<ItemStack[]>();
-        public static final Set<ItemStack[]> BLACKSTONE_STOVE_FRYING = new HashSet<ItemStack[]>();
-        public static final Set<ItemStack[]> BLACKSTONE_STOVE_SOUP = new HashSet<ItemStack[]>();
+    public static class RecipeCollections {
+
+        public static final RecipeCollection<StoveRecipe> BLACKSTONE_STOVE_OVEN = new RecipeCollection<StoveRecipe>("BLACKSTONE_STOVE_OVEN");
+        public static final RecipeCollection<StoveRecipe> BLACKSTONE_STOVE_FRYING = new RecipeCollection<StoveRecipe>("BLACKSTONE_STOVE_FRYING");
+        public static final RecipeCollection<StoveRecipe> BLACKSTONE_STOVE_SOUP = new RecipeCollection<StoveRecipe>("BLACKSTONE_STOVE_SOUP");
 
         static {
-            BLACKSTONE_STOVE_OVEN.add(BAKED_NETHER_TUBERS);
+            BLACKSTONE_STOVE_OVEN.add(new StoveRecipe(
+                BAKED_NETHER_TUBERS, WildernetherStacks.BAKED_NETHER_TUBERS, Mode.Oven
+            ));
             
-            BLACKSTONE_STOVE_OVEN.add(NETHER_CHIPS);
-            BLACKSTONE_STOVE_OVEN.add(FRIED_WARPED_FUNGUS);
-            BLACKSTONE_STOVE_OVEN.add(FRIED_CRIMSON_FUNGUS);
-            
-            BLACKSTONE_STOVE_OVEN.add(CRIMSON_STEW);
-            BLACKSTONE_STOVE_OVEN.add(WARPED_STEW);
-            BLACKSTONE_STOVE_OVEN.add(NETHER_HOTPOT);
-        }
-    }
+            BLACKSTONE_STOVE_FRYING.add(new StoveRecipe(
+                NETHER_CHIPS, WildernetherStacks.NETHER_CHIPS, Mode.Frying
+            ));
+            BLACKSTONE_STOVE_FRYING.add(new StoveRecipe(
+                FRIED_WARPED_FUNGUS, WildernetherStacks.FRIED_WARPED_FUNGUS, Mode.Frying
+            ));
+            BLACKSTONE_STOVE_FRYING.add(new StoveRecipe(
+                FRIED_CRIMSON_FUNGUS, WildernetherStacks.FRIED_CRIMSON_FUNGUS, Mode.Frying
+            ));
 
-    @Nullable
-    @ParametersAreNonnullByDefault
-    public static ItemStack getOutput(ItemStack[] tryRecipe, Set<ItemStack[]> recipeCategory) {
-        if (recipeCategory.contains(tryRecipe)) {
-            return RecipeUtil.getOutputByRecipe().getOrDefault(tryRecipe, null);
-        } else {
-            return null;
+            BLACKSTONE_STOVE_SOUP.add(new StoveRecipe(
+                CRIMSON_STEW, WildernetherStacks.CRIMSON_STEW, Mode.Soup
+            ));
+            BLACKSTONE_STOVE_SOUP.add(new StoveRecipe(
+                WARPED_STEW, WildernetherStacks.WARPED_STEW, Mode.Soup
+            ));
+            BLACKSTONE_STOVE_SOUP.add(new StoveRecipe(
+                NETHER_HOTPOT, WildernetherStacks.NETHER_HOTPOT, Mode.Soup
+            ));
         }
     }
 

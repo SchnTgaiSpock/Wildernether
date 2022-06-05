@@ -15,20 +15,24 @@ public class LootManager {
 
     public static class LootTable {
 
+
         @Getter
         private HashMap<ItemStack, Double> values;
         private String name;
 
         @ParametersAreNonnullByDefault
-        public LootTable(String name, ItemStack[] items, double[] values) {
+        public LootTable(String name, ItemStack[] itemList, double[] valueList) {
+
+            this.values = new HashMap<ItemStack, Double>();
             this.name = name;
-            if (items.length != values.length) {
+
+            if (itemList.length != valueList.length) {
                 Wildernether.getInstance().getLogger().log(Level.WARNING,
                     "items and values arrays are not the same length in LootTable " + this.name);
                 return;
             }
-            for (int i = 0; i < items.length; i++) {
-                this.values.put(items[i], values[i]);
+            for (int i = 0; i < itemList.length; i++) {
+                this.values.put(itemList[i], valueList[i]);
             }
 
         }
@@ -39,6 +43,7 @@ public class LootManager {
     private static HashMap<String, LootTable> netherPlantHarvest = new HashMap<String, LootTable>();
 
     public static void setup() {
+
         netherPlantHarvest.put(
             "NETHER_SPROUTS",
             new LootTable(

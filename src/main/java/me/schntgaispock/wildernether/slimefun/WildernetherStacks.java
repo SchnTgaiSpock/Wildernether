@@ -29,7 +29,7 @@ public class WildernetherStacks {
     static {
         GUIDE_WILDERNETHER = new CustomItemStack(
             Material.WARPED_ROOTS,
-            Theme.CRIMSON.getColor() + "Wildernether"
+            Theme.WARPED.getColor() + "Wildernether"
         );
 
         GUIDE_MATERIALS = new CustomItemStack(
@@ -60,49 +60,37 @@ public class WildernetherStacks {
         RECIPE_BREAK_NETHER_PLANTS = new CustomItemStack(
             Material.NETHER_SPROUTS,
             "&bBreak Nether Plants",
-            "",
-            Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
-            Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
-            Theme.LORE.getColor() + "scythe. The available plants are Nether Sprouts,",
-            Theme.LORE.getColor() + "Warped Roots, Warped Fungus, Twisting Vines,",
-            Theme.LORE.getColor() + "Crimson Root, Crimson Fungus, Weeping Vines,",
-            Theme.LORE.getColor() + "and Shroomlight"
+            "&7Wildernether plants are obtained by harvesting",
+            "&7(breaking) plants in the nether with a hoe or",
+            "&7scythe. The available plants are Nether Sprouts,",
+            "&7Warped Roots, Warped Fungus, Twisting Vines,",
+            "&7Crimson Root, Crimson Fungus, Weeping Vines,",
+            "&7and Shroomlight"
         );
 
         RECIPE_BLACKSTONE_STOVE_OVEN = new CustomItemStack(
             Material.BLAST_FURNACE,
-            "&bBlackstone Stove (Oven)",
-            "",
-            Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
-            Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
-            Theme.LORE.getColor() + "scythe. The available plants are Nether Sprouts,",
-            Theme.LORE.getColor() + "Warped Roots, Warped Fungus, Twisting Vines,",
-            Theme.LORE.getColor() + "Crimson Root, Crimson Fungus, Weeping Vines,",
-            Theme.LORE.getColor() + "and Shroomlight"
+            "&bBlackstone Stove (Oven)",            
+            "&7This recipe is crafted using the Blackstone",
+            "&7Stove's oven mode. This is the default."
         );
 
         RECIPE_BLACKSTONE_STOVE_FRYING = new CustomItemStack(
             Material.BLAST_FURNACE,
             "&bBlackstone Stove (Frying)",
-            "",
-            Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
-            Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
-            Theme.LORE.getColor() + "scythe. The available plants are Nether Sprouts,",
-            Theme.LORE.getColor() + "Warped Roots, Warped Fungus, Twisting Vines,",
-            Theme.LORE.getColor() + "Crimson Root, Crimson Fungus, Weeping Vines,",
-            Theme.LORE.getColor() + "and Shroomlight"
+            "&7This recipe is crafted using the Blackstone",
+            "&7Stove's frying mode. Place a Heavy Weighted",
+            "&7Pressure Plate (Iron Pressure Plate) on top",
+            "&7of the stove to use this mode."
         );
 
         RECIPE_BLACKSTONE_STOVE_SOUP = new CustomItemStack(
             Material.BLAST_FURNACE,
             "&bBlackstone Stove (Soup)",
-            "",
-            Theme.LORE.getColor() + "Wildernether plants are obtained by harvesting",
-            Theme.LORE.getColor() + "(breaking) plants in the nether with a hoe or",
-            Theme.LORE.getColor() + "scythe. The available plants are Nether Sprouts,",
-            Theme.LORE.getColor() + "Warped Roots, Warped Fungus, Twisting Vines,",
-            Theme.LORE.getColor() + "Crimson Root, Crimson Fungus, Weeping Vines,",
-            Theme.LORE.getColor() + "and Shroomlight"
+            "&7This recipe is crafted using the Blackstone",
+            "&7Stove's soup mode (for a broad definition",
+            "&7of soup). Place a Cauldron on top of the",
+            "&7stove to use this mode."
         );
 
 
@@ -145,7 +133,7 @@ public class WildernetherStacks {
         
         SOUL_SCYTHE = new SlimefunItemStack(
             "SOUL_SCYTHE",
-            Material.GOLDEN_HOE,
+            Material.IRON_HOE,
             Theme.SOUL.getColor() + "Soul Scythe",
             "",
             Theme.LORE.getColor() + "Its blade quivers with soft whispers.",
@@ -195,7 +183,7 @@ public class WildernetherStacks {
         );
 
         NETHER_TUBERS = new SlimefunItemStack(
-            "NETHER_COMPOSTER",
+            "NETHER_TUBERS",
             Material.POTATO,
             Theme.WARPED.getColor() + "Nether Tubers",
             "",
@@ -244,8 +232,7 @@ public class WildernetherStacks {
             Material.TWISTING_VINES,
             Theme.WARPED.getColor() + "Twisted Bean Sprout",
             "",
-            Theme.LORE.getColor() + "Each one of these vines is as thick as",
-            Theme.LORE.getColor() + "your arm..."
+            Theme.LORE.getColor() + "High source of fibre!"
         );
 
         RED_SPIDER_LILY = new SlimefunItemStack(

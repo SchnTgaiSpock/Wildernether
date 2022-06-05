@@ -9,6 +9,7 @@ import org.bukkit.NamespacedKey;
 import io.github.mooy1.infinitylib.core.AbstractAddon;
 import me.schntgaispock.wildernether.slimefun.listeners.Listeners;
 import me.schntgaispock.wildernether.slimefun.managers.ItemManager;
+import me.schntgaispock.wildernether.slimefun.managers.LootManager;
 
 public class Wildernether extends AbstractAddon {
 
@@ -37,6 +38,7 @@ public class Wildernether extends AbstractAddon {
         getLogger().info("#=======================================#");
 
         ItemManager.setup();
+        LootManager.setup();
         Listeners.setup();
     }
 

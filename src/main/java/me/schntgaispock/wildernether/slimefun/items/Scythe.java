@@ -3,6 +3,7 @@ package me.schntgaispock.wildernether.slimefun.items;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -31,7 +32,6 @@ public class Scythe extends SlimefunItem {
     @Override
     public void preRegister() {
         addItemHandler((ToolUseHandler) this::onToolUse);
-
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -40,7 +40,9 @@ public class Scythe extends SlimefunItem {
         if (!tool.hasItemMeta()) {
             return;
         }
-        
+
+        Logger logger = Wildernether.getInstance().getLogger();
+
         final HashMap<String, LootTable> netherPlantHarvestLoot = LootManager.getNetherPlantHarvest();
 
         String name = ChatUtils.removeColorCodes(tool.getItemMeta().getDisplayName());
@@ -55,26 +57,22 @@ public class Scythe extends SlimefunItem {
                 break;
         
             default:
-                Wildernether.getInstance().getLogger().log(Level.INFO, String.format(
-                    "Scythe#onToolUse: Slimefun Item '{0}' does not match any existing Scythes", name
+                logger.log(Level.INFO, String.format(
+                    "Scythe#onToolUse: Slimefun Item '%s' does not match any existing Scythes", name
                 ));
                 break;
         }
 
-        if (toolValue >= 0 && Calc.flip(0.4)) {
+        if (toolValue >= 0 && Calc.flip(0.2)) {
             // To prevent players from just breaking and replanting for items
             e.setDropItems(false);
             String brokenBlockName = e.getBlock().getType().toString();
             LootTable lootTable = netherPlantHarvestLoot.getOrDefault(brokenBlockName, null);
 
             if (lootTable != null) {
-                ItemStack toDrop = Calc.getRandomDropFromLootTableAndToolValue(lootTable, toolValue);
+                ItemStack toDrop = Calc.getRandomDropFromLootTableAndToolValue(lootTable, toolValue).clone();
                 toDrop.setAmount(Calc.clamp(1, fortune, 5));
                 e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), toDrop);
-            } else {
-                Wildernether.getInstance().getLogger().log(Level.INFO, String.format(
-                    "Broke {0} with a Scythe, but there was no loot in the loot table", brokenBlockName
-                ));
             }
         }
     }
