@@ -1,20 +1,14 @@
 package me.schntgaispock.wildernether.slimefun.listeners;
 
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.annotation.Nonnull;
 
 import org.bukkit.Bukkit;
-import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.WildernetherRecipes;
@@ -29,7 +23,6 @@ public class BlackstoneStoveListener implements Listener {
     @EventHandler
     public void onClick(@Nonnull InventoryClickEvent e) {
         ItemStack clickedItem = e.getCurrentItem();
-        Logger logger = Wildernether.getInstance().getLogger();
 
 
         // Probably a better way to do this, pls tell me if you know
@@ -68,11 +61,8 @@ public class BlackstoneStoveListener implements Listener {
                 break;
         }
 
-        logger.log(Level.INFO, "About to try getOutput, recipeCollection: " + recipeCollection.toString());
         ItemStack recipeOutput = recipeCollection.getOrNull(currentRecipe);
         if (recipeOutput == null) {
-            logger.log(Level.INFO, "Could not find recipe for " + Arrays.toString(currentRecipe));
-
             e.getWhoClicked().sendMessage(Theme.CUISINE.getColor() + "Invalid " + mode.toString().toLowerCase() + " recipe!");
             return;
         }
@@ -96,8 +86,6 @@ public class BlackstoneStoveListener implements Listener {
         
         // Failure
         } else {
-            logger.log(Level.INFO, "currentlyInOutput: " + currentlyInOutput.toString());
-            logger.log(Level.INFO, "recipeOutput: " + recipeOutput.toString());
             e.getWhoClicked().sendMessage(Theme.CUISINE.getColor() + "Output is occupied!");
             return;
         }

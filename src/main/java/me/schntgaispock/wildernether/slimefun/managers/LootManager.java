@@ -1,48 +1,34 @@
 package me.schntgaispock.wildernether.slimefun.managers;
 
-import java.util.HashMap;
-import java.util.logging.Level;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import org.bukkit.inventory.ItemStack;
 
 import lombok.Getter;
-import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.WildernetherStacks;
+import me.schntgaispock.wildernether.slimefun.util.LootTable;
+import me.schntgaispock.wildernether.slimefun.util.LootTableCollection;
 
 public class LootManager {
 
-    public static class LootTable {
 
-
-        @Getter
-        private HashMap<ItemStack, Double> values;
-        private String name;
-
-        @ParametersAreNonnullByDefault
-        public LootTable(String name, ItemStack[] itemList, double[] valueList) {
-
-            this.values = new HashMap<ItemStack, Double>();
-            this.name = name;
-
-            if (itemList.length != valueList.length) {
-                Wildernether.getInstance().getLogger().log(Level.WARNING,
-                    "items and values arrays are not the same length in LootTable " + this.name);
-                return;
-            }
-            for (int i = 0; i < itemList.length; i++) {
-                this.values.put(itemList[i], valueList[i]);
-            }
-
-        }
-
-    }
+    // Common, uncommon, rare, legendary, and secret item weights
+    static final double CW = 500.0;
+    static final double UW = 100.0;
+    static final double RW = 25.0;
+    static final double LW = 10.0;
+    static final double SW = 1.0;
     
     @Getter
-    private static HashMap<String, LootTable> netherPlantHarvest = new HashMap<String, LootTable>();
+    static LootTableCollection netherPlantHarvest;
 
     public static void setup() {
+
+        netherPlantHarvest = new LootTableCollection();
+
+        final String[] SCYTHE_TOOL_NAMES = {
+            "BLACKSTONE_SCYTHE",
+            "SOUL_SCYTHE"
+        };
+
 
         netherPlantHarvest.put(
             "NETHER_SPROUTS",
@@ -56,12 +42,13 @@ public class LootManager {
 
                     WildernetherStacks.GARDEN_OF_THE_LOST_SOUL,
                 }, 
-                new double[] {
-                    10, 10, 10, 20, 100
-                }
+                new double[][] {
+                    { CW/3, CW/3, CW/3, UW, SW },
+                    { CW/3, CW/3, CW/3, UW, 3*SW }
+                },
+                SCYTHE_TOOL_NAMES
             )
-        );
-        netherPlantHarvest.put(
+        ).put(
             "WARPED_ROOTS",
             new LootTable(
                 "WARPED_ROOTS_HARVEST",
@@ -74,12 +61,13 @@ public class LootManager {
 
                     WildernetherStacks.TULIP_OF_PARTINGS,
                 }, 
-                new double[] {
-                    10, 10, 10, 10, 20, 100
-                }
+                new double[][] {
+                    { CW/4, CW/4, CW/4, CW/4, UW, SW },
+                    { CW/4, CW/4, CW/4, CW/4, UW, 3*SW },
+                },
+                SCYTHE_TOOL_NAMES
             )
-        );
-        netherPlantHarvest.put(
+        ).put(
             "WARPED_FUNGUS",
             new LootTable(
                 "WARPED_FUNGUS_HARVEST",
@@ -91,12 +79,13 @@ public class LootManager {
 
                     WildernetherStacks.TULIP_OF_PARTINGS,
                 }, 
-                new double[] {
-                    10, 10, 10, 20, 100
-                }
+                new double[][] {
+                    { CW/3, CW/3, CW/3, UW, SW },
+                    { CW/3, CW/3, CW/3, UW, 3*SW }
+                },
+                SCYTHE_TOOL_NAMES
             )
-        );
-        netherPlantHarvest.put(
+        ).put(
             "TWISTING_VINES",
             new LootTable(
                 "TWISTING_VINES_HARVEST",
@@ -106,12 +95,13 @@ public class LootManager {
 
                     WildernetherStacks.BLOOM_OF_UNHEARD_CRIES,
                 }, 
-                new double[] {
-                    10, 20, 100
-                }
+                new double[][] {
+                    { CW, UW, SW },
+                    { CW, UW, 3*SW }
+                },
+                SCYTHE_TOOL_NAMES
             )
-        );
-        netherPlantHarvest.put(
+        ).put(
             "CRIMSON_ROOTS",
             new LootTable(
                 "CRIMSON_ROOTS_HARVEST",
@@ -122,12 +112,13 @@ public class LootManager {
 
                     WildernetherStacks.BLOSSOM_OF_SOLITUDE,
                 }, 
-                new double[] {
-                    10, 10, 20, 100
-                }
+                new double[][] {
+                    { CW/2, CW/2, UW, SW },
+                    { CW/2, CW/2, UW, 3*SW }
+                },
+                SCYTHE_TOOL_NAMES
             )
-        );
-        netherPlantHarvest.put(
+        ).put(
             "CRIMSON_FUNGUS",
             new LootTable(
                 "CRIMSON_FUNGUS_HARVEST",
@@ -138,27 +129,30 @@ public class LootManager {
 
                     WildernetherStacks.GARDEN_OF_THE_LOST_SOUL,
                 }, 
-                new double[] {
-                    10, 20, 20, 100
-                }
+                new double[][] {
+                    { CW, UW/2, UW/2, SW },
+                    { CW, UW/2, UW/2, 3*SW }
+                },
+                SCYTHE_TOOL_NAMES
             )
-        );
-        netherPlantHarvest.put(
+        ).put(
             "WEEPING_VINES",
             new LootTable(
                 "WEEPING_VINES_HARVEST",
                 new ItemStack[] {
+                    WildernetherStacks.SHROOMLIGHT_SPORES,
                     WildernetherStacks.CRIMSON_DREADLOCKS,
                     WildernetherStacks.RED_SPIDER_LILY,
 
                     WildernetherStacks.LAMENT_OF_THE_DAMNED,
                 }, 
-                new double[] {
-                    10, 20, 100
-                }
+                new double[][] {
+                    { CW, UW/2, UW/2, SW },
+                    { CW, UW/2, UW/2, 3*SW }
+                },
+                SCYTHE_TOOL_NAMES
             )
-        );
-        netherPlantHarvest.put(
+        ).put(
             "SHROOMLIGHT",
             new LootTable(
                 "SHROOMLIGHT_HARVEST",
@@ -167,9 +161,11 @@ public class LootManager {
 
                     WildernetherStacks.BLOOM_OF_UNHEARD_CRIES,
                 }, 
-                new double[] {
-                    10, 100
-                }
+                new double[][] {
+                    { CW, SW },
+                    { CW, 3*SW }
+                },
+                SCYTHE_TOOL_NAMES
             )
         );
     }

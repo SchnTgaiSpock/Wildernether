@@ -1,6 +1,5 @@
 package me.schntgaispock.wildernether.slimefun.items;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,8 +18,8 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.managers.LootManager;
-import me.schntgaispock.wildernether.slimefun.managers.LootManager.LootTable;
 import me.schntgaispock.wildernether.slimefun.util.Calc;
+import me.schntgaispock.wildernether.slimefun.util.LootTableCollection;
 
 public class Scythe extends SlimefunItem {
 
@@ -43,17 +42,14 @@ public class Scythe extends SlimefunItem {
 
         Logger logger = Wildernether.getInstance().getLogger();
 
-        final HashMap<String, LootTable> netherPlantHarvestLoot = LootManager.getNetherPlantHarvest();
+        final LootTableCollection netherPlantHarvestLoot = LootManager.getNetherPlantHarvest();
 
         String name = ChatUtils.removeColorCodes(tool.getItemMeta().getDisplayName());
-        int toolValue = -1;
+        String toolName = "";
         switch (name) {
             case "Blackstone Scythe":
-                toolValue = 10;
-                break;
-
             case "Soul Scythe":
-                toolValue = 40;
+                toolName = name.toUpperCase().replace(" ", "_");
                 break;
         
             default:
@@ -63,17 +59,17 @@ public class Scythe extends SlimefunItem {
                 break;
         }
 
-        if (toolValue >= 0 && Calc.flip(0.2)) {
-            // To prevent players from just breaking and replanting for items
-            e.setDropItems(false);
-            String brokenBlockName = e.getBlock().getType().toString();
-            LootTable lootTable = netherPlantHarvestLoot.getOrDefault(brokenBlockName, null);
+        // To prevent players from just breaking and replanting for items
+        e.setDropItems(false);
 
-            if (lootTable != null) {
-                ItemStack toDrop = Calc.getRandomDropFromLootTableAndToolValue(lootTable, toolValue).clone();
-                toDrop.setAmount(Calc.clamp(1, fortune, 5));
-                e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), toDrop);
-            }
+        if (toolName.length() > 0 && Calc.flip(0.2)) {
+            ItemStack toDrop = netherPlantHarvestLoot
+                .getLootTables()
+                .get(e.getBlock().getType().toString())
+                .getDistribution(toolName)
+                .getDrop();
+            toDrop.setAmount(Calc.clamp(1, fortune, 5));
+            e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), toDrop);
         }
     }
 
