@@ -1,5 +1,5 @@
 # Wildernether
-Wildernether seeks to improve survivability in the nether by adding more food and tools that can be easily crafted in the nether
+Wildernether seeks to improve survivability in the nether by adding food and tools that can be easily crafted in the nether
 
 ## Gathering Resources
 The main way to gather resources in Wildernether is by breaking nether plants with Scythes. The plants that you can break are Nether Sprouts, Warped Roots, Warped Fungus, Twisting Vines, Crimson Roots, Crimson Fungus, Weeping Vines, and Shroomlight.
@@ -21,8 +21,8 @@ When using the correct mode and recipe, clicking on the "Click to cook!" button 
 ### Reading the Stove recipes
 The top 6 slots in the Simefun Guide correspond to the 6 slots in the Stove. For soup recipes, the bottom-middle item goes in the Bowl slot.
 
-### Plans for the Future
-I plan on updating and maintaining this addon after the 2022 AddonJam ends.
+## Plans for the Future
+I plan on updating and maintaining this addon even after the 2022 AddonJam ends.
 
 ## Credits
 *InfinityLib* by Mooy1<br>
