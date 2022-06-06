@@ -199,49 +199,63 @@ public class ItemManager {
             WildernetherGroups.CUISINE,
             WildernetherStacks.BAKED_NETHER_TUBERS,
             WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_OVEN,
-            WildernetherRecipes.BAKED_NETHER_TUBERS
+            WildernetherRecipes.BAKED_NETHER_TUBERS,
+            6,
+            5.0
         );
         
         NETHER_CHIPS = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.NETHER_CHIPS,
             WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_FRYING,
-            WildernetherRecipes.NETHER_CHIPS
+            WildernetherRecipes.NETHER_CHIPS,
+            3,
+            2.0
         );
         
         FRIED_WARPED_FUNGUS = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.FRIED_WARPED_FUNGUS,
             WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_FRYING,
-            WildernetherRecipes.FRIED_WARPED_FUNGUS
+            WildernetherRecipes.FRIED_WARPED_FUNGUS,
+            2,
+            2.0
         );
         
         FRIED_CRIMSON_FUNGUS = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.FRIED_CRIMSON_FUNGUS,
             WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_FRYING,
-            WildernetherRecipes.FRIED_CRIMSON_FUNGUS
+            WildernetherRecipes.FRIED_CRIMSON_FUNGUS,
+            2,
+            2.0
         );
 
         CRIMSON_STEW = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.CRIMSON_STEW,
             WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_SOUP,
-            WildernetherRecipes.CRIMSON_STEW
+            WildernetherRecipes.CRIMSON_STEW,
+            10,
+            20.0
         );
         
         WARPED_STEW = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.WARPED_STEW,
             WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_SOUP,
-            WildernetherRecipes.WARPED_STEW
+            WildernetherRecipes.WARPED_STEW,
+            10,
+            20.0
         );
         
         NETHER_HOTPOT = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.NETHER_HOTPOT,
             WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_SOUP,
-            WildernetherRecipes.NETHER_HOTPOT
+            WildernetherRecipes.NETHER_HOTPOT,
+            12,
+            20.0
         );
 
         // ---------- Registration ----------        

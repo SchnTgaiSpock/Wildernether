@@ -2,6 +2,7 @@ package me.schntgaispock.wildernether.slimefun;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.schntgaispock.wildernether.slimefun.util.Theme;
 import org.bukkit.Material;
 
@@ -14,19 +15,24 @@ public class WildernetherStacks {
 
 
     public static final SlimefunItemStack CRIMSON_FRAME, WARPED_FRAME, SOUL_STONE;
+    public static final SlimefunItemStack FUNGAL_IRON_SCRAP, FUNGAL_GOLD_SCRAP;
 
     public static final SlimefunItemStack BLACKSTONE_SCYTHE, SOUL_SCYTHE, NETHER_COMPOSTER, BLACKSTONE_STOVE;
 
     public static final SlimefunItemStack WARPED_CACTUS, BLAZESPROUT, NETHER_TUBERS, CRYSTAL_MUSHROOM,
-        SHROOMLIGHT_SPORES, CRIMSON_DREADLOCKS, WARPED_ROSE, TWISTED_BEAN_SPROUT, RED_SPIDER_LILY, WARPED_LOTUS;
+        SHROOMLIGHT_SPORES, WARPED_ROSE;
+    public static final SlimefunItemStack CRIMSON_DREADLOCKS, TWISTED_BEAN_SPROUT, RED_SPIDER_LILY, WARPED_LOTUS;
     public static final SlimefunItemStack GARDEN_OF_THE_LOST_SOUL, TULIP_OF_PARTINGS, BLOOM_OF_UNHEARD_CRIES,
     BLOSSOM_OF_SOLITUDE, LAMENT_OF_THE_DAMNED;
 
-    public static final SlimefunItemStack CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT;
-    public static final SlimefunItemStack BAKED_NETHER_TUBERS;
-    public static final SlimefunItemStack NETHER_CHIPS, FRIED_WARPED_FUNGUS, FRIED_CRIMSON_FUNGUS;
+    public static final SlimefunItemStack WARPED_SALAD, MUSHROOM_SLICES, BAKED_BEANS_AND_TOAST;
+    public static final SlimefunItemStack CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT, PORK_BONE_SOUP;
+    public static final SlimefunItemStack BAKED_NETHER_TUBERS, BAKED_BEANS;
+    public static final SlimefunItemStack NETHER_CHIPS, FRIED_WARPED_FUNGUS, FRIED_CRIMSON_FUNGUS, SPICY_FRIED_LOTUS;
     
+
     static {
+        // ---------- Guide Items ----------
         GUIDE_WILDERNETHER = new CustomItemStack(
             Material.WARPED_ROOTS,
             Theme.WARPED.getColor() + "Wildernether"
@@ -93,7 +99,7 @@ public class WildernetherStacks {
             "&7stove to use this mode."
         );
 
-
+        // ---------- Materials ----------
         CRIMSON_FRAME = new SlimefunItemStack(
             "CRIMSON_FRAME",
             Material.CRIMSON_FENCE_GATE,
@@ -120,7 +126,26 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "You can hear strange whisperings coming",
             Theme.LORE.getColor() + "from deep within"
         );
+
+        FUNGAL_IRON_SCRAP = new SlimefunItemStack(
+            "FUNGAL_IRON_SCRAP",
+            Material.IRON_NUGGET,
+            Theme.NEUTRAL.getColor() + "Fungal Iron Scrap",
+            "",
+            Theme.LORE.getColor() + "A piece of scrap iron overgrown",
+            Theme.LORE.getColor() + "with fungus"
+        );
+
+        FUNGAL_GOLD_SCRAP = new SlimefunItemStack(
+            "FUNGAL_IRON_SCRAP",
+            Material.IRON_NUGGET,
+            Theme.NEUTRAL.getColor() + "Fungal Gold Scrap",
+            "",
+            Theme.LORE.getColor() + "A piece of scrap gold overgrown",
+            Theme.LORE.getColor() + "with fungus"
+        );
         
+        // ---------- Tools ----------
         BLACKSTONE_SCYTHE = new SlimefunItemStack(
             "BLACKSTONE_SCYTHE",
             Material.STONE_HOE,
@@ -161,6 +186,7 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "able to keep itself lit forever!"
         );
 
+        // ---------- Plants ----------
         WARPED_CACTUS = new SlimefunItemStack(
             "WARPED_CACTUS",
             Material.CACTUS,
@@ -209,15 +235,6 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "the bulbs that they dropped from."
         );
 
-        CRIMSON_DREADLOCKS = new SlimefunItemStack(
-            "CRIMSON_DREADLOCKS",
-            Material.WEEPING_VINES,
-            Theme.CRIMSON.getColor() + "Crimson Dreadlocks",
-            "",
-            Theme.LORE.getColor() + "Each one of these vines is as thick as",
-            Theme.LORE.getColor() + "your arm..."
-        );
-
         WARPED_ROSE = new SlimefunItemStack(
             "WARPED_ROSE",
             Material.WITHER_ROSE,
@@ -225,6 +242,15 @@ public class WildernetherStacks {
             "",
             Theme.LORE.getColor() + "This rose's thorns are bigger than its",
             Theme.LORE.getColor() + "leaves"
+        );
+
+        CRIMSON_DREADLOCKS = new SlimefunItemStack(
+            "CRIMSON_DREADLOCKS",
+            Material.WEEPING_VINES,
+            Theme.CRIMSON.getColor() + "Crimson Dreadlocks",
+            "",
+            Theme.LORE.getColor() + "Each one of these vines is as thick as",
+            Theme.LORE.getColor() + "your arm..."
         );
 
         TWISTED_BEAN_SPROUT = new SlimefunItemStack(
@@ -252,6 +278,7 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "Don't they normally grow on water?"
         );
 
+        // ---------- Secret ----------
         GARDEN_OF_THE_LOST_SOUL = new SlimefunItemStack(
             "GARDEN_OF_THE_LOST_SOUL",
             Material.GRASS,
@@ -322,13 +349,16 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "unknown land for the rest of eternity"
         );
 
+        // ---------- Cuisine ----------
         CRIMSON_STEW = new SlimefunItemStack(
             "CRIMSON_STEW",
             Material.RABBIT_STEW,
             Theme.CUISINE.getColor() + "Crimson Stew",
             "",
             Theme.LORE.getColor() + "A thick clump of fungus floats on the top.",
-            Theme.LORE.getColor() + "It should be safe to eat, right?"
+            Theme.LORE.getColor() + "It should be safe to eat, right?",
+            "",
+            LoreBuilder.hunger(5)
         );
 
         WARPED_STEW = new SlimefunItemStack(
@@ -337,7 +367,9 @@ public class WildernetherStacks {
             Theme.CUISINE.getColor() + "Warped Stew",
             "",
             Theme.LORE.getColor() + "The surface of the soup shines green.",
-            Theme.LORE.getColor() + "It should be safe to eat, right?"
+            Theme.LORE.getColor() + "It should be safe to eat, right?",
+            "",
+            LoreBuilder.hunger(5)
         );
 
         NETHER_HOTPOT = new SlimefunItemStack(
@@ -345,7 +377,9 @@ public class WildernetherStacks {
             Material.MUSHROOM_STEW,
             Theme.CUISINE.getColor() + "Nether Hotpot",
             "",
-            Theme.LORE.getColor() + "Piping hot!"
+            Theme.LORE.getColor() + "Piping hot!",
+            "",
+            LoreBuilder.hunger(6)
         );
 
         BAKED_NETHER_TUBERS = new SlimefunItemStack(
@@ -353,7 +387,9 @@ public class WildernetherStacks {
             Material.BAKED_POTATO,
             Theme.CUISINE.getColor() + "Baked Nether Tubers",
             "",
-            Theme.LORE.getColor() + "It's just a baked potato."
+            Theme.LORE.getColor() + "It's just a baked potato.",
+            "",
+            LoreBuilder.hunger(3)
         );
 
         NETHER_CHIPS = new SlimefunItemStack(
@@ -361,7 +397,9 @@ public class WildernetherStacks {
             Material.BREAD,
             Theme.CUISINE.getColor() + "Nether Chips™",
             "",
-            Theme.LORE.getColor() + "You'll get fat if you eat too much"
+            Theme.LORE.getColor() + "You'll get fat if you eat too much",
+            "",
+            LoreBuilder.hunger(1.5)
         );
 
         FRIED_WARPED_FUNGUS = new SlimefunItemStack(
@@ -369,7 +407,9 @@ public class WildernetherStacks {
             Material.WARPED_FUNGUS,
             Theme.CUISINE.getColor() + "Fried Warped Fungus",
             "",
-            Theme.LORE.getColor() + "Crunchy!"
+            Theme.LORE.getColor() + "Crunchy!",
+            "",
+            LoreBuilder.hunger(1)
         );
 
         FRIED_CRIMSON_FUNGUS = new SlimefunItemStack(
@@ -377,7 +417,12 @@ public class WildernetherStacks {
             Material.CRIMSON_FUNGUS,
             Theme.CUISINE.getColor() + "Fried Crimson Fungus",
             "",
-            Theme.LORE.getColor() + "Crunchy!"
+            Theme.LORE.getColor() + "Crunchy!",
+            "",
+            LoreBuilder.hunger(1)
         );
+
+        // ---------- Weapons ----------
+
     }
 }
