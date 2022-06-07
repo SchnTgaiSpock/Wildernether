@@ -8,27 +8,41 @@ import org.bukkit.Material;
 
 public class WildernetherStacks {
 
+    // Guide Use Only
     public static final CustomItemStack GUIDE_WILDERNETHER, GUIDE_MATERIALS, GUIDE_PLANTS, GUIDE_CUISINE, 
-        GUIDE_TOOLS, GUIDE_MACHINES;
+        GUIDE_TOOLS, GUIDE_RECIPE_HOGLIN_BOUILLON;
     
-    public static final CustomItemStack RECIPE_BREAK_NETHER_PLANTS, RECIPE_BLACKSTONE_STOVE_OVEN, RECIPE_BLACKSTONE_STOVE_FRYING, RECIPE_BLACKSTONE_STOVE_SOUP;
+    public static final CustomItemStack RECIPE_BREAK_NETHER_PLANTS, RECIPE_BLACKSTONE_STOVE_OVEN, RECIPE_BLACKSTONE_STOVE_FRYING, RECIPE_BLACKSTONE_STOVE_POT;
 
-
+    // Materials
     public static final SlimefunItemStack CRIMSON_FRAME, WARPED_FRAME, SOUL_STONE;
     public static final SlimefunItemStack FUNGAL_IRON_SCRAP, FUNGAL_GOLD_SCRAP;
 
+    // Tools
     public static final SlimefunItemStack BLACKSTONE_SCYTHE, SOUL_SCYTHE, NETHER_COMPOSTER, BLACKSTONE_STOVE;
 
+    // Common
     public static final SlimefunItemStack WARPED_CACTUS, BLAZESPROUT, NETHER_TUBERS, CRYSTAL_MUSHROOM,
-        SHROOMLIGHT_SPORES, WARPED_ROSE;
+        SHROOMLIGHT_SPORES, WARPED_ROSE, RED_CARROT;
+    // Uncommon
     public static final SlimefunItemStack CRIMSON_DREADLOCKS, TWISTED_BEAN_SPROUT, RED_SPIDER_LILY, WARPED_LOTUS;
+    // Rare
+    public static final SlimefunItemStack SMOLDERING_HERBS, IMMOLATED_VINES, OCTARINE_NETHERCAP, EMERALD_FIREBLOOM;
+    // Secret
     public static final SlimefunItemStack GARDEN_OF_THE_LOST_SOUL, TULIP_OF_PARTINGS, BLOOM_OF_UNHEARD_CRIES,
     BLOSSOM_OF_SOLITUDE, LAMENT_OF_THE_DAMNED;
 
-    public static final SlimefunItemStack WARPED_SALAD, MUSHROOM_SLICES, BAKED_BEANS_AND_TOAST;
-    public static final SlimefunItemStack CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT, PORK_BONE_SOUP;
-    public static final SlimefunItemStack BAKED_NETHER_TUBERS, BAKED_BEANS;
+    // Ingredients
+    public static final SlimefunItemStack HOGLIN_SPARE_RIB, HOGLIN_BELLY, HOGLIN_TROTTERS, HOGLIN_BOUILLON;
+    // Crafted
+    public static final SlimefunItemStack WARPED_SALAD, MUSHROOM_SLICES;
+    // Oven
+    public static final SlimefunItemStack BAKED_NETHER_TUBERS, GLOWING_BEANS;
+    // Frying
     public static final SlimefunItemStack NETHER_CHIPS, FRIED_WARPED_FUNGUS, FRIED_CRIMSON_FUNGUS, SPICY_FRIED_LOTUS;
+    // Pot
+    public static final SlimefunItemStack CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT, PORK_BONE_SOUP,
+        BOILED_NETHER_TUBERS, BOILED_WARPED_CACTUS;
     
 
     static {
@@ -58,16 +72,16 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "Nether Cuisine"
         );
 
-        GUIDE_MACHINES = new CustomItemStack(
-            Material.CRIMSON_HYPHAE,
-            Theme.LORE.getColor() + "Wildernether Machines"
+        GUIDE_RECIPE_HOGLIN_BOUILLON = new CustomItemStack(
+            Material.PORKCHOP,
+            Theme.CUISINE.getColor() + "Any Hoglin meat"
         );
 
         RECIPE_BREAK_NETHER_PLANTS = new CustomItemStack(
             Material.NETHER_SPROUTS,
             "&bBreak Nether Plants",
-            "&7Wildernether plants are obtained by harvesting",
-            "&7(breaking) plants in the nether with a hoe or",
+            "&7This resource is obtained by harvesting",
+            "&7(breaking) plants in the nether with a",
             "&7scythe. The available plants are Nether Sprouts,",
             "&7Warped Roots, Warped Fungus, Twisting Vines,",
             "&7Crimson Root, Crimson Fungus, Weeping Vines,",
@@ -90,13 +104,12 @@ public class WildernetherStacks {
             "&7of the stove to use this mode."
         );
 
-        RECIPE_BLACKSTONE_STOVE_SOUP = new CustomItemStack(
+        RECIPE_BLACKSTONE_STOVE_POT = new CustomItemStack(
             Material.BLAST_FURNACE,
-            "&bBlackstone Stove (Soup)",
+            "&bBlackstone Stove (Pot)",
             "&7This recipe is crafted using the Blackstone",
-            "&7Stove's soup mode (for a broad definition",
-            "&7of soup). Place a Cauldron on top of the",
-            "&7stove to use this mode."
+            "&7Stove's pot mode. Place a Cauldron on top",
+            "&7of the stove to use this mode."
         );
 
         // ---------- Materials ----------
@@ -158,7 +171,7 @@ public class WildernetherStacks {
         
         SOUL_SCYTHE = new SlimefunItemStack(
             "SOUL_SCYTHE",
-            Material.IRON_HOE,
+            Material.NETHERITE_HOE,
             Theme.SOUL.getColor() + "Soul Scythe",
             "",
             Theme.LORE.getColor() + "Its blade quivers with soft whispers.",
@@ -244,6 +257,15 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "leaves"
         );
 
+        RED_CARROT = new SlimefunItemStack(
+            "RED_CARROT",
+            Material.CARROT,
+            Theme.CRIMSON.getColor() + "Red Carrot",
+            "",
+            Theme.LORE.getColor() + "It's red"
+        );
+
+        // Uncommon
         CRIMSON_DREADLOCKS = new SlimefunItemStack(
             "CRIMSON_DREADLOCKS",
             Material.WEEPING_VINES,
@@ -278,7 +300,43 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "Don't they normally grow on water?"
         );
 
-        // ---------- Secret ----------
+        // Rare
+        SMOLDERING_HERBS = new SlimefunItemStack(
+            "SMOLDERING_HERBS",
+            Material.FERN,
+            Theme.CRIMSON_DARK.getColor() + "Smoldering Herbs",
+            "",
+            Theme.LORE.getColor() + "They don't actually burn"
+        );
+
+        IMMOLATED_VINES = new SlimefunItemStack(
+            "IMMOLATED_VINES",
+            Material.WEEPING_VINES,
+            Theme.CRIMSON_DARK.getColor() + "Immolated Vines",
+            "",
+            Theme.LORE.getColor() + "Even after being cut from the fungus,",
+            Theme.LORE.getColor() + "it pulsates like a heart"
+        );
+
+        OCTARINE_NETHERCAP = new SlimefunItemStack(
+            "OCTARINE_NETHERCAP",
+            Material.WARPED_FUNGUS,
+            Theme.WARPED_DARK.getColor() + "Octarine Nethercap",
+            "",
+            Theme.LORE.getColor() + "A fluorescent greenish-yellow purple"
+        );
+
+        EMERALD_FIREBLOOM = new SlimefunItemStack(
+            "EMERALD_FIREBLOOM",
+            Material.FERN,
+            Theme.WARPED_DARK.getColor() + "Emerald Firebloom",
+            "",
+            Theme.LORE.getColor() + "Its petals undulate like the flames",
+            Theme.LORE.getColor() + "of a fire"
+        );
+        
+
+        // Secret
         GARDEN_OF_THE_LOST_SOUL = new SlimefunItemStack(
             "GARDEN_OF_THE_LOST_SOUL",
             Material.GRASS,
@@ -349,37 +407,74 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "unknown land for the rest of eternity"
         );
 
+        // Ingredients
+        HOGLIN_SPARE_RIB = new SlimefunItemStack(
+            "HOGLIN_SPARE_RIB",
+            Material.BEEF,
+            Theme.CUISINE.getColor() + "Hoglin Spare Rib",
+            "",
+            Theme.LORE.getColor() + "A thick cut of meat from the side",
+            Theme.LORE.getColor() + "of a hoglin"
+        );
+        
+        HOGLIN_BELLY = new SlimefunItemStack(
+            "HOGLIN_BELLY",
+            Material.PORKCHOP,
+            Theme.CUISINE.getColor() + "Hoglin Belly",
+            "",
+            Theme.LORE.getColor() + "A fatty cut of meat from the underside",
+            Theme.LORE.getColor() + "of a hoglin"
+        );
+        
+        HOGLIN_TROTTERS = new SlimefunItemStack(
+            "HOGLIN_TROTTERS",
+            Material.RABBIT_FOOT,
+            Theme.CUISINE.getColor() + "Hoglin Trotters",
+            "",
+            Theme.LORE.getColor() + "The foot of a hoglin"
+        );
+        
         // ---------- Cuisine ----------
-        CRIMSON_STEW = new SlimefunItemStack(
-            "CRIMSON_STEW",
-            Material.RABBIT_STEW,
-            Theme.CUISINE.getColor() + "Crimson Stew",
+
+        // Ingredients
+        HOGLIN_BOUILLON = new SlimefunItemStack(
+            "HOGLIN_BOUILLON",
+            Material.WATER_BUCKET,
+            Theme.CUISINE.getColor() + "Hoglin Bouillon",
             "",
-            Theme.LORE.getColor() + "A thick clump of fungus floats on the top.",
-            Theme.LORE.getColor() + "It should be safe to eat, right?",
-            "",
-            LoreBuilder.hunger(5)
+            Theme.LORE.getColor() + "A flavourful broth made by simmering",
+            Theme.LORE.getColor() + "hoglin meat"
         );
 
-        WARPED_STEW = new SlimefunItemStack(
-            "WARPED_STEW",
-            Material.SUSPICIOUS_STEW,
-            Theme.CUISINE.getColor() + "Warped Stew",
+        BOILED_WARPED_CACTUS = new SlimefunItemStack(
+            "BOILED_WARPED_CACTUS",
+            Material.GREEN_DYE,
+            Theme.CUISINE.getColor() + "Boiled Warped Cactus",
             "",
-            Theme.LORE.getColor() + "The surface of the soup shines green.",
-            Theme.LORE.getColor() + "It should be safe to eat, right?",
+            Theme.LORE.getColor() + "You can eat cactus?",
             "",
-            LoreBuilder.hunger(5)
+            LoreBuilder.hunger(1)
         );
 
-        NETHER_HOTPOT = new SlimefunItemStack(
-            "NETHER_HOTPOT",
-            Material.MUSHROOM_STEW,
-            Theme.CUISINE.getColor() + "Nether Hotpot",
+        // Crafted
+        WARPED_SALAD = new SlimefunItemStack(
+            "WARPED_SALAD",
+            Material.GREEN_DYE,
+            Theme.CUISINE.getColor() + "Warped Salad",
             "",
-            Theme.LORE.getColor() + "Piping hot!",
+            Theme.LORE.getColor() + "Salads are green, so its okay to eat",
             "",
-            LoreBuilder.hunger(6)
+            LoreBuilder.hunger(4)
+        );
+
+        MUSHROOM_SLICES = new SlimefunItemStack(
+            "MUSHROOM_SLICES",
+            Material.BEETROOT_SEEDS,
+            Theme.CUISINE.getColor() + "Mushroom Slices",
+            "",
+            Theme.LORE.getColor() + "An assortment of oddly coloured fungi",
+            "",
+            LoreBuilder.hunger(3)
         );
 
         BAKED_NETHER_TUBERS = new SlimefunItemStack(
@@ -387,11 +482,23 @@ public class WildernetherStacks {
             Material.BAKED_POTATO,
             Theme.CUISINE.getColor() + "Baked Nether Tubers",
             "",
-            Theme.LORE.getColor() + "It's just a baked potato.",
+            Theme.LORE.getColor() + "It's a baked potato.",
             "",
             LoreBuilder.hunger(3)
         );
 
+        GLOWING_BEANS = new SlimefunItemStack(
+            "GLOWING_BEANS",
+            Material.GLOW_BERRIES,
+            Theme.CUISINE.getColor() + "Glowing Beans",
+            "",
+            Theme.LORE.getColor() + "It looks like cooking has brought out",
+            Theme.LORE.getColor() + "The luminescent elements in the spores",
+            "",
+            LoreBuilder.hunger(0.5)
+        );
+
+        // Frying
         NETHER_CHIPS = new SlimefunItemStack(
             "NETHER_CHIPS",
             Material.BREAD,
@@ -420,6 +527,69 @@ public class WildernetherStacks {
             Theme.LORE.getColor() + "Crunchy!",
             "",
             LoreBuilder.hunger(1)
+        );
+
+        SPICY_FRIED_LOTUS = new SlimefunItemStack(
+            "SPICY_FRIED_LOTUS",
+            Material.COOKIE,
+            Theme.CUISINE.getColor() + "Spicy Fried Lotus",
+            "",
+            Theme.LORE.getColor() + "Sweet, savoury, &oand spicy!",
+            "",
+            LoreBuilder.hunger(3.5)
+        );
+
+        // Pot
+        CRIMSON_STEW = new SlimefunItemStack(
+            "CRIMSON_STEW",
+            Material.BEETROOT_SOUP,
+            Theme.CUISINE.getColor() + "Crimson Stew",
+            "",
+            Theme.LORE.getColor() + "A thick clump of fungus floats on the top.",
+            Theme.LORE.getColor() + "It should be safe to eat, right?",
+            "",
+            LoreBuilder.hunger(5)
+        );
+
+        WARPED_STEW = new SlimefunItemStack(
+            "WARPED_STEW",
+            Material.SUSPICIOUS_STEW,
+            Theme.CUISINE.getColor() + "Warped Stew",
+            "",
+            Theme.LORE.getColor() + "The surface of the soup shines green.",
+            Theme.LORE.getColor() + "It should be safe to eat, right?",
+            "",
+            LoreBuilder.hunger(5)
+        );
+
+        NETHER_HOTPOT = new SlimefunItemStack(
+            "NETHER_HOTPOT",
+            Material.RABBIT_STEW,
+            Theme.CUISINE.getColor() + "Nether Hotpot",
+            "",
+            Theme.LORE.getColor() + "Piping hot!",
+            "",
+            LoreBuilder.hunger(6)
+        );
+
+        PORK_BONE_SOUP = new SlimefunItemStack(
+            "PORK_BONE_SOUP",
+            Material.MUSHROOM_STEW,
+            Theme.CUISINE.getColor() + "Pork Bone Soup",
+            "",
+            Theme.LORE.getColor() + "Very filling!",
+            "",
+            LoreBuilder.hunger(8.5)
+        );
+
+        BOILED_NETHER_TUBERS = new SlimefunItemStack(
+            "BOILED_NETHER_TUBERS",
+            Material.POTATO,
+            Theme.CUISINE.getColor() + "Boiled Nether Tubers",
+            "",
+            Theme.LORE.getColor() + "It's a boiled potato.",
+            "",
+            LoreBuilder.hunger(3)
         );
 
         // ---------- Weapons ----------

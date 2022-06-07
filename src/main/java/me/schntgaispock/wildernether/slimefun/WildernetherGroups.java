@@ -9,8 +9,7 @@ public class WildernetherGroups {
     public static final SubGroup TOOLS = new SubGroup("tools", WildernetherStacks.GUIDE_TOOLS);
     public static final SubGroup PLANTS = new SubGroup("plants", WildernetherStacks.GUIDE_PLANTS);
     public static final SubGroup CUISINE = new SubGroup("cuisine", WildernetherStacks.GUIDE_CUISINE);
-    public static final SubGroup MACHINES = new SubGroup("machines", WildernetherStacks.GUIDE_MACHINES);
     public static final MultiGroup WILDERNETHER = new MultiGroup("wildernether", WildernetherStacks.GUIDE_WILDERNETHER,
-        MATERIALS, TOOLS, PLANTS, CUISINE, MACHINES);
+        MATERIALS, TOOLS, PLANTS, CUISINE);
 
 }

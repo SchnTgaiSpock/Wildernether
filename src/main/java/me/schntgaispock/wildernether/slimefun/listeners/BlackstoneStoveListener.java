@@ -1,5 +1,8 @@
 package me.schntgaispock.wildernether.slimefun.listeners;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Nonnull;
 
 import org.bukkit.Bukkit;
@@ -14,6 +17,7 @@ import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.WildernetherRecipes;
 import me.schntgaispock.wildernether.slimefun.items.BlackstoneStove;
 import me.schntgaispock.wildernether.slimefun.items.BlackstoneStove.Mode;
+import me.schntgaispock.wildernether.slimefun.util.GeneralUtil;
 import me.schntgaispock.wildernether.slimefun.util.Theme;
 import me.schntgaispock.wildernether.slimefun.util.RecipeUtil.RecipeCollection;
 import me.schntgaispock.wildernether.slimefun.util.RecipeUtil.StoveRecipe;
@@ -52,8 +56,8 @@ public class BlackstoneStoveListener implements Listener {
                 recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_FRYING;
                 break;
                 
-            case Soup:
-                recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_SOUP;
+            case Pot:
+                recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_POT;
                 break;
 
             default:
@@ -90,10 +94,18 @@ public class BlackstoneStoveListener implements Listener {
             return;
         }
 
-        // Reduce input items by 1
+        // Reduce input items by 1, gives buckets and bowls back
         for (ItemStack item : currentRecipe) {
             if (item != null) {
                 item.setAmount(item.getAmount() - 1);
+                ItemStack returnItem = GeneralUtil.returnItemAfterUsing(item);
+
+                Map<Integer, ItemStack> leftOvers = new HashMap<Integer, ItemStack>();
+                if (returnItem != null &&
+                    !(leftOvers = e.getWhoClicked().getInventory().addItem(returnItem)).isEmpty() &&
+                    !(leftOvers = e.getInventory().addItem(leftOvers.get(0))).isEmpty()) {
+                    e.getWhoClicked().getWorld().dropItemNaturally(e.getWhoClicked().getLocation(), leftOvers.get(0));
+                }
             }
         }
     }

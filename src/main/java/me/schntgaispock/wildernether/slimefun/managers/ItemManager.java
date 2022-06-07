@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.WildernetherGroups;
 import me.schntgaispock.wildernether.slimefun.WildernetherRecipes;
@@ -17,18 +18,28 @@ import me.schntgaispock.wildernether.slimefun.items.WildernetherPlant;
 
 public class ItemManager {
 
-    public static SlimefunItem CRIMSON_FRAME, WARPED_FRAME, SOUL_STONE;
+    public static SlimefunItem CRIMSON_FRAME, WARPED_FRAME, SOUL_STONE,
+        FUNGAL_IRON_SCRAP, FUNGAL_GOLD_SCRAP;
 
     public static SlimefunItem BLACKSTONE_SCYTHE, SOUL_SCYTHE, NETHER_COMPOSTER, BLACKSTONE_STOVE;
 
+    // Common
     public static SlimefunItem WARPED_CACTUS, BLAZESPROUT, NETHER_TUBERS, CRYSTAL_MUSHROOM,
-        SHROOMLIGHT_SPORES, CRIMSON_DREADLOCKS, WARPED_ROSE, TWISTED_BEAN_SPROUT, RED_SPIDER_LILY, WARPED_LOTUS;
+        SHROOMLIGHT_SPORES, WARPED_ROSE, RED_CARROT;
+    // Uncommon
+    public static SlimefunItem CRIMSON_DREADLOCKS, TWISTED_BEAN_SPROUT, RED_SPIDER_LILY, WARPED_LOTUS;
+    // Rare
+    public static SlimefunItem SMOLDERING_HERBS, IMMOLATED_VINES, OCTARINE_NETHERCAP, EMERALD_FIREBLOOM;
+    // Secret
     public static SlimefunItem GARDEN_OF_THE_LOST_SOUL, TULIP_OF_PARTINGS, BLOOM_OF_UNHEARD_CRIES,
     BLOSSOM_OF_SOLITUDE, LAMENT_OF_THE_DAMNED;
 
-    public static SlimefunItem BAKED_NETHER_TUBERS;
-    public static SlimefunItem NETHER_CHIPS, FRIED_WARPED_FUNGUS, FRIED_CRIMSON_FUNGUS;
-    public static SlimefunItem CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT;
+    public static SlimefunItem HOGLIN_SPARE_RIB, HOGLIN_BELLY, HOGLIN_TROTTERS, HOGLIN_BOUILLON;
+    public static SlimefunItem WARPED_SALAD, MUSHROOM_SLICES;
+    public static SlimefunItem BAKED_NETHER_TUBERS, GLOWING_BEANS;
+    public static SlimefunItem NETHER_CHIPS, FRIED_WARPED_FUNGUS, FRIED_CRIMSON_FUNGUS, SPICY_FRIED_LOTUS;
+    public static SlimefunItem CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT, PORK_BONE_SOUP,
+        BOILED_NETHER_TUBERS, BOILED_WARPED_CACTUS;
 
 
     public static void setup() {
@@ -56,6 +67,20 @@ public class ItemManager {
             WildernetherStacks.SOUL_STONE,
             RecipeType.ANCIENT_ALTAR,
             WildernetherRecipes.SOUL_STONE
+        );
+
+        FUNGAL_IRON_SCRAP = new WildernetherPlant(
+            WildernetherGroups.MATERIALS,
+            WildernetherStacks.FUNGAL_IRON_SCRAP,
+            WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
+            new ItemStack[9]
+        );
+
+        FUNGAL_GOLD_SCRAP = new WildernetherPlant(
+            WildernetherGroups.MATERIALS,
+            WildernetherStacks.FUNGAL_GOLD_SCRAP,
+            WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
+            new ItemStack[9]
         );
 
         // ---------- Tools ----------
@@ -88,6 +113,7 @@ public class ItemManager {
         );
 
         // ---------- Plants ----------
+        // Common
         WARPED_CACTUS = new WildernetherPlant(
             WildernetherGroups.PLANTS,
             WildernetherStacks.WARPED_CACTUS,
@@ -123,16 +149,24 @@ public class ItemManager {
             new ItemStack[9]
         );
 
-        CRIMSON_DREADLOCKS = new WildernetherPlant(
+        WARPED_ROSE = new WildernetherPlant(
             WildernetherGroups.PLANTS,
-            WildernetherStacks.CRIMSON_DREADLOCKS,
+            WildernetherStacks.WARPED_ROSE,
             WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
             new ItemStack[9]
         );
 
-        WARPED_ROSE = new WildernetherPlant(
+        RED_CARROT = new WildernetherPlant(
             WildernetherGroups.PLANTS,
-            WildernetherStacks.WARPED_ROSE,
+            WildernetherStacks.RED_CARROT,
+            WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
+            new ItemStack[9]
+        );
+
+        // Uncommon
+        CRIMSON_DREADLOCKS = new WildernetherPlant(
+            WildernetherGroups.PLANTS,
+            WildernetherStacks.CRIMSON_DREADLOCKS,
             WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
             new ItemStack[9]
         );
@@ -158,7 +192,36 @@ public class ItemManager {
             new ItemStack[9]
         );
 
-        // ---------- Secret ----------
+        // Rare
+        SMOLDERING_HERBS = new WildernetherPlant(
+            WildernetherGroups.PLANTS,
+            WildernetherStacks.SMOLDERING_HERBS,
+            WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
+            new ItemStack[9]
+        );
+        
+        IMMOLATED_VINES = new WildernetherPlant(
+            WildernetherGroups.PLANTS,
+            WildernetherStacks.IMMOLATED_VINES,
+            WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
+            new ItemStack[9]
+        );
+        
+        OCTARINE_NETHERCAP = new WildernetherPlant(
+            WildernetherGroups.PLANTS,
+            WildernetherStacks.OCTARINE_NETHERCAP,
+            WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
+            new ItemStack[9]
+        );
+        
+        EMERALD_FIREBLOOM = new WildernetherPlant(
+            WildernetherGroups.PLANTS,
+            WildernetherStacks.EMERALD_FIREBLOOM,
+            WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
+            new ItemStack[9]
+        );
+
+        // Secret 
         GARDEN_OF_THE_LOST_SOUL = new WildernetherPlant(
             WildernetherGroups.PLANTS,
             WildernetherStacks.GARDEN_OF_THE_LOST_SOUL,
@@ -195,6 +258,65 @@ public class ItemManager {
         );
 
         // ---------- Cuisine ----------
+
+        // Ingredients
+        HOGLIN_SPARE_RIB = new UnplaceableBlock(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.HOGLIN_SPARE_RIB,
+            RecipeType.MOB_DROP,
+            WildernetherRecipes.HOGLIN_SPARE_RIB
+        );
+
+        HOGLIN_BELLY = new UnplaceableBlock(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.HOGLIN_BELLY,
+            RecipeType.MOB_DROP,
+            WildernetherRecipes.HOGLIN_BELLY
+        );
+
+        HOGLIN_TROTTERS = new UnplaceableBlock(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.HOGLIN_TROTTERS,
+            RecipeType.MOB_DROP,
+            WildernetherRecipes.HOGLIN_TROTTERS
+        );
+
+        HOGLIN_BOUILLON = new UnplaceableBlock(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.HOGLIN_BOUILLON,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_POT,
+            WildernetherRecipes.HOGLIN_BOUILLON_GUIDE
+        );
+        
+        BOILED_WARPED_CACTUS = new WildernetherCuisine(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.BOILED_WARPED_CACTUS,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_POT,
+            WildernetherRecipes.BOILED_WARPED_CACTUS,
+            2,
+            2.0
+        );
+
+        // Crafted
+        WARPED_SALAD = new WildernetherCuisine(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.WARPED_SALAD,
+            RecipeType.ENHANCED_CRAFTING_TABLE,
+            WildernetherRecipes.WARPED_SALAD,
+            8,
+            3.0
+        );
+
+        MUSHROOM_SLICES = new WildernetherCuisine(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.MUSHROOM_SLICES,
+            RecipeType.ENHANCED_CRAFTING_TABLE,
+            WildernetherRecipes.MUSHROOM_SLICES,
+            6,
+            2.0
+        );
+
+        // Oven
         BAKED_NETHER_TUBERS = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.BAKED_NETHER_TUBERS,
@@ -203,7 +325,17 @@ public class ItemManager {
             6,
             5.0
         );
+
+        GLOWING_BEANS = new WildernetherCuisine(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.GLOWING_BEANS,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_OVEN,
+            WildernetherRecipes.GLOWING_BEANS,
+            1,
+            2.0
+        );
         
+        // Frying
         NETHER_CHIPS = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.NETHER_CHIPS,
@@ -230,11 +362,21 @@ public class ItemManager {
             2,
             2.0
         );
+        
+        SPICY_FRIED_LOTUS = new WildernetherCuisine(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.SPICY_FRIED_LOTUS,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_FRYING,
+            WildernetherRecipes.SPICY_FRIED_LOTUS,
+            7,
+            10.0
+        );
 
+        // Pot
         CRIMSON_STEW = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.CRIMSON_STEW,
-            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_SOUP,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_POT,
             WildernetherRecipes.CRIMSON_STEW,
             10,
             20.0
@@ -243,7 +385,7 @@ public class ItemManager {
         WARPED_STEW = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.WARPED_STEW,
-            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_SOUP,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_POT,
             WildernetherRecipes.WARPED_STEW,
             10,
             20.0
@@ -252,13 +394,34 @@ public class ItemManager {
         NETHER_HOTPOT = new WildernetherCuisine(
             WildernetherGroups.CUISINE,
             WildernetherStacks.NETHER_HOTPOT,
-            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_SOUP,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_POT,
             WildernetherRecipes.NETHER_HOTPOT,
             12,
             20.0
         );
+        
+        PORK_BONE_SOUP = new WildernetherCuisine(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.PORK_BONE_SOUP,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_POT,
+            WildernetherRecipes.PORK_BONE_SOUP,
+            17,
+            20.0
+        );
+        
+        BOILED_NETHER_TUBERS = new WildernetherCuisine(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.BOILED_NETHER_TUBERS,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_POT,
+            WildernetherRecipes.BOILED_NETHER_TUBERS,
+            6,
+            5.0
+        );
 
-        // ---------- Registration ----------        
+        // ---------- Registration ----------
+        FUNGAL_IRON_SCRAP.setUseableInWorkbench(true);
+        FUNGAL_GOLD_SCRAP.setUseableInWorkbench(true);
+        
         GARDEN_OF_THE_LOST_SOUL.setHidden(true);
         TULIP_OF_PARTINGS.setHidden(true);
         BLOOM_OF_UNHEARD_CRIES.setHidden(true);
@@ -266,25 +429,35 @@ public class ItemManager {
         LAMENT_OF_THE_DAMNED.setHidden(true);
 
 
+        // ----- Materials -----
         CRIMSON_FRAME.register(wn);
         WARPED_FRAME.register(wn);
         SOUL_STONE.register(wn);
 
+        // ----- Tools -----
         BLACKSTONE_SCYTHE.register(wn);
         SOUL_SCYTHE.register(wn);
         NETHER_COMPOSTER.register(wn);
         BLACKSTONE_STOVE.register(wn);
 
+        // ----- Plants -----
         WARPED_CACTUS.register(wn);
         BLAZESPROUT.register(wn);
         NETHER_TUBERS.register(wn);
         CRYSTAL_MUSHROOM.register(wn);
         SHROOMLIGHT_SPORES.register(wn);
-        CRIMSON_DREADLOCKS.register(wn);
         WARPED_ROSE.register(wn);
+        RED_CARROT.register(wn);
+
+        CRIMSON_DREADLOCKS.register(wn);
         TWISTED_BEAN_SPROUT.register(wn);
         RED_SPIDER_LILY.register(wn);
         WARPED_LOTUS.register(wn);
+
+        SMOLDERING_HERBS.register(wn);
+        IMMOLATED_VINES.register(wn);
+        OCTARINE_NETHERCAP.register(wn);
+        EMERALD_FIREBLOOM.register(wn);
 
         GARDEN_OF_THE_LOST_SOUL.register(wn);
         TULIP_OF_PARTINGS.register(wn);
@@ -292,12 +465,28 @@ public class ItemManager {
         BLOSSOM_OF_SOLITUDE.register(wn);
         LAMENT_OF_THE_DAMNED.register(wn);
         
+        // ----- Cuisine -----
+        HOGLIN_SPARE_RIB.register(wn);
+        HOGLIN_BELLY.register(wn);
+        HOGLIN_TROTTERS.register(wn);
+        BOILED_WARPED_CACTUS.register(wn);
+        HOGLIN_BOUILLON.register(wn);
+
+        WARPED_SALAD.register(wn);
+        MUSHROOM_SLICES.register(wn);
+        
         BAKED_NETHER_TUBERS.register(wn);
+        GLOWING_BEANS.register(wn);
+
         NETHER_CHIPS.register(wn);
         FRIED_WARPED_FUNGUS.register(wn);
         FRIED_CRIMSON_FUNGUS.register(wn);
+        SPICY_FRIED_LOTUS.register(wn);
+
         CRIMSON_STEW.register(wn);
         WARPED_STEW.register(wn);
         NETHER_HOTPOT.register(wn);
+        PORK_BONE_SOUP.register(wn);
+        BOILED_NETHER_TUBERS.register(wn);
     }
 }

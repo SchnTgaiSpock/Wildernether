@@ -19,6 +19,7 @@ import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.managers.LootManager;
 import me.schntgaispock.wildernether.slimefun.util.Calc;
+import me.schntgaispock.wildernether.slimefun.util.LootTable;
 import me.schntgaispock.wildernether.slimefun.util.LootTableCollection;
 
 public class Scythe extends SlimefunItem {
@@ -40,11 +41,11 @@ public class Scythe extends SlimefunItem {
             return;
         }
 
-        Logger logger = Wildernether.getInstance().getLogger();
+        final Logger logger = Wildernether.getInstance().getLogger();
 
         final LootTableCollection netherPlantHarvestLoot = LootManager.getNetherPlantHarvest();
 
-        String name = ChatUtils.removeColorCodes(tool.getItemMeta().getDisplayName());
+        final String name = ChatUtils.removeColorCodes(tool.getItemMeta().getDisplayName());
         String toolName = "";
         switch (name) {
             case "Blackstone Scythe":
@@ -59,17 +60,22 @@ public class Scythe extends SlimefunItem {
                 break;
         }
 
-        // To prevent players from just breaking and replanting for items
-        e.setDropItems(false);
+        final LootTable lootTable = netherPlantHarvestLoot
+            .getLootTables()
+            .get(e.getBlock().getType().toString());
 
-        if (toolName.length() > 0 && Calc.flip(0.2)) {
-            ItemStack toDrop = netherPlantHarvestLoot
-                .getLootTables()
-                .get(e.getBlock().getType().toString())
-                .getDistribution(toolName)
-                .getDrop();
-            toDrop.setAmount(Calc.clamp(1, fortune, 5));
-            e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), toDrop);
+        if (lootTable != null) {
+
+            // To prevent players from just breaking and replanting for items
+            e.setDropItems(false);
+
+            if (toolName.length() > 0 && Calc.flip(0.2)) {
+                ItemStack toDrop = lootTable
+                    .getDistribution(toolName)
+                    .getDrop();
+                toDrop.setAmount(Calc.clamp(1, fortune, 5));
+                e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), toDrop);
+            }
         }
     }
 

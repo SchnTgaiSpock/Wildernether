@@ -22,7 +22,7 @@ import me.schntgaispock.wildernether.slimefun.util.Theme;
 public class BlackstoneStove extends MenuBlock {
 
     public enum Mode {
-        Oven, Frying, Soup
+        Oven, Frying, Pot
     }
 
     public static final int[] GUI_BACKGROUND_SLOTS = {
@@ -44,7 +44,7 @@ public class BlackstoneStove extends MenuBlock {
     public static final int OUTPUT_SLOT = 25;
     public static final String COOK_CONFIRM_NAME = "Click to cook!";
 
-    public static final ItemStack BOWL_BORDER_ITEM = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE, "&9Bowl", "&7Only soup recipes need a bowl!");
+    public static final ItemStack BOWL_BORDER_ITEM = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE, "&9Bowl");
     public static final ItemStack RECIPE_BORDER_ITEM = new CustomItemStack(Material.CAMPFIRE, Theme.CUISINE.getColor() + "Recipe");
     
     @Getter
@@ -98,7 +98,7 @@ public class BlackstoneStove extends MenuBlock {
 
             switch (blockOnTop.getType()) {
                 case CAULDRON:
-                    stoveMode = Mode.Soup;
+                    stoveMode = Mode.Pot;
                     break;
 
                 case HEAVY_WEIGHTED_PRESSURE_PLATE:

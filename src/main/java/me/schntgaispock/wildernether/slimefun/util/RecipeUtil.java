@@ -78,8 +78,9 @@ public class RecipeUtil {
             return this.name;
         }
 
-        public void add(R recipe) {
+        public RecipeCollection<R> add(R recipe) {
             recol.put(recipe.getRecipe(), recipe.getOutput());
+            return this;
         }
 
         @Nullable
