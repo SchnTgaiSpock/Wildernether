@@ -2,7 +2,6 @@ package me.schntgaispock.wildernether.slimefun.items;
 
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -15,12 +14,11 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
-import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import me.schntgaispock.wildernether.Wildernether;
-import me.schntgaispock.wildernether.slimefun.managers.LootManager;
-import me.schntgaispock.wildernether.slimefun.util.Calc;
-import me.schntgaispock.wildernether.slimefun.util.LootTable;
-import me.schntgaispock.wildernether.slimefun.util.LootTableCollection;
+import me.schntgaispock.wildernether.loot.LootTable;
+import me.schntgaispock.wildernether.loot.LootTableCollection;
+import me.schntgaispock.wildernether.managers.LootManager;
+import me.schntgaispock.wildernether.util.Calc;
 
 public class Scythe extends SlimefunItem {
 
@@ -36,28 +34,28 @@ public class Scythe extends SlimefunItem {
 
     @EventHandler(ignoreCancelled = true)
     @ParametersAreNonnullByDefault
-    private void onToolUse(BlockBreakEvent e, ItemStack tool, int fortune, List<ItemStack> drops) {
-        if (!tool.hasItemMeta()) {
+    private void onToolUse(BlockBreakEvent e, ItemStack item, int fortune, List<ItemStack> drops) {
+        if (!item.hasItemMeta()) {
+            return;
+        }
+        SlimefunItem tool = SlimefunItem.getByItem(item);
+
+        if (tool == null) {
             return;
         }
 
-        final Logger logger = Wildernether.getInstance().getLogger();
-
         final LootTableCollection netherPlantHarvestLoot = LootManager.getNetherPlantHarvest();
 
-        final String name = ChatUtils.removeColorCodes(tool.getItemMeta().getDisplayName());
-        String toolName = "";
-        switch (name) {
-            case "Blackstone Scythe":
-            case "Soul Scythe":
-                toolName = name.toUpperCase().replace(" ", "_");
+        switch (tool.getId()) {
+            case "BLACKSTONE_SCYTHE":
+            case "SOUL_SCYTHE":
                 break;
         
             default:
-                logger.log(Level.INFO, String.format(
-                    "Scythe#onToolUse: Slimefun Item '%s' does not match any existing Scythes", name
+                Wildernether.getInstance().getLogger().log(Level.INFO, String.format(
+                    "Scythe#onToolUse: Slimefun Item '%s' does not match any existing Scythes", tool.getId()
                 ));
-                break;
+                return;
         }
 
         final LootTable lootTable = netherPlantHarvestLoot
@@ -69,10 +67,8 @@ public class Scythe extends SlimefunItem {
             // To prevent players from just breaking and replanting for items
             e.setDropItems(false);
 
-            if (toolName.length() > 0 && Calc.flip(0.2)) {
-                ItemStack toDrop = lootTable
-                    .getDistribution(toolName)
-                    .getDrop();
+            if (Calc.flip(1/3)) {
+                ItemStack toDrop = lootTable.getDrop(tool.getId());
                 toDrop.setAmount(Calc.clamp(1, fortune, 5));
                 e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), toDrop);
             }

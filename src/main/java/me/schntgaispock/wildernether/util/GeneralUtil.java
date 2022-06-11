@@ -1,4 +1,5 @@
-package me.schntgaispock.wildernether.slimefun.util;
+package me.schntgaispock.wildernether.util;
+
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,6 +25,12 @@ public class GeneralUtil {
             case RABBIT_STEW:
             case SUSPICIOUS_STEW:
                 returnItem = new ItemStack(Material.BOWL);
+                break;
+
+            case POTION:
+            case HONEY_BOTTLE:
+                returnItem = new ItemStack(Material.GLASS_BOTTLE);
+                break;
 
             default:
                 break;
@@ -31,4 +38,19 @@ public class GeneralUtil {
         return returnItem;
     }
 
+    public static ItemStack[] collpaseItemStackArray(ItemStack[][] array) {
+        int size = 0;
+        for (ItemStack[] sub : array) {
+            size += sub.length;
+        }
+        final ItemStack[] l = new ItemStack[size];
+
+        int i = 0;
+        for (ItemStack[] sub : array) {
+            for (ItemStack bottom : sub) {
+                l[i++] = bottom;
+            }
+        }
+        return l;
+    }
 }

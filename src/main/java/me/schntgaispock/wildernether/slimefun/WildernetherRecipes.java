@@ -7,8 +7,8 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.items.BlackstoneStove.Mode;
-import me.schntgaispock.wildernether.slimefun.util.RecipeUtil.StoveRecipe;
-import me.schntgaispock.wildernether.slimefun.util.RecipeUtil.RecipeCollection;
+import me.schntgaispock.wildernether.slimefun.recipes.RecipeCollection;
+import me.schntgaispock.wildernether.slimefun.recipes.StoveRecipe;
 
 public class WildernetherRecipes {
     
@@ -25,6 +25,12 @@ public class WildernetherRecipes {
         );
         public static final RecipeType BLACKSTONE_STOVE_POT = new RecipeType(
             Wildernether.newNamespacedKey("BLACKSTONE_STOVE_POT"), WildernetherStacks.RECIPE_BLACKSTONE_STOVE_POT
+        );
+        public static final RecipeType BLACKSTONE_STOVE_BREWING = new RecipeType(
+            Wildernether.newNamespacedKey("BLACKSTONE_STOVE_BREWING"), WildernetherStacks.RECIPE_BLACKSTONE_STOVE_BREWING
+        );
+        public static final RecipeType KILL_MOB = new RecipeType(
+            Wildernether.newNamespacedKey("KILL_MOB"), WildernetherStacks.RECIPE_KILL_MOB
         );
     }
 
@@ -51,7 +57,6 @@ public class WildernetherRecipes {
                 SPICY_FRIED_LOTUS, WildernetherStacks.SPICY_FRIED_LOTUS, Mode.Frying
             ));
 
-
         public static final RecipeCollection<StoveRecipe> BLACKSTONE_STOVE_POT =
             new RecipeCollection<StoveRecipe>("BLACKSTONE_STOVE_POT")
             .add(new StoveRecipe(
@@ -75,6 +80,22 @@ public class WildernetherRecipes {
             )).add(new StoveRecipe(
                 BOILED_WARPED_CACTUS, WildernetherStacks.BOILED_WARPED_CACTUS, Mode.Pot
             ));
+
+        public static final RecipeCollection<StoveRecipe> BLACKSTONE_STOVE_BREWING =
+            new RecipeCollection<StoveRecipe>("BLACKSTONE_STOVE_BREWING")
+            .add(new StoveRecipe(
+                BREW_OF_FIRE_WARDING, WildernetherStacks.BREW_OF_FIRE_WARDING, Mode.Brewing
+            )).add(new StoveRecipe(
+                BREW_OF_FIRE_WARDING_GUIDE, WildernetherStacks.BREW_OF_FIRE_WARDING, Mode.Brewing
+            )).add(new StoveRecipe(
+                BREW_OF_FARSIGHT, WildernetherStacks.BREW_OF_FARSIGHT, Mode.Brewing
+            )).add(new StoveRecipe(
+                BREW_OF_FARSIGHT_GUIDE, WildernetherStacks.BREW_OF_FARSIGHT, Mode.Brewing
+            )).add(new StoveRecipe(
+                BREW_OF_CELERITY, WildernetherStacks.BREW_OF_CELERITY, Mode.Brewing
+            )).add(new StoveRecipe(
+                BREW_OF_CELERITY_GUIDE, WildernetherStacks.BREW_OF_CELERITY, Mode.Brewing
+            ));
     }
 
     public static final ItemStack[] CRIMSON_FRAME, WARPED_FRAME, SOUL_STONE;
@@ -82,12 +103,14 @@ public class WildernetherRecipes {
     public static final ItemStack[] BLACKSTONE_SCYTHE, SOUL_SCYTHE, NETHER_COMPOSTER, BLACKSTONE_STOVE;
 
     public static final ItemStack[] HOGLIN_BOUILLON_GUIDE, HOGLIN_BOUILLON1, HOGLIN_BOUILLON2, HOGLIN_BOUILLON3,
-        HOGLIN_SPARE_RIB, HOGLIN_BELLY, HOGLIN_TROTTERS;
+        HOGLIN_SPARE_RIB, HOGLIN_BELLY, HOGLIN_TROTTERS, CACTUS_JUICE;
     public static final ItemStack[] WARPED_SALAD, MUSHROOM_SLICES;
     public static final ItemStack[] BAKED_NETHER_TUBERS, GLOWING_BEANS;
     public static final ItemStack[] NETHER_CHIPS, FRIED_WARPED_FUNGUS, FRIED_CRIMSON_FUNGUS, SPICY_FRIED_LOTUS;
     public static final ItemStack[] CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT, PORK_BONE_SOUP,
         BOILED_NETHER_TUBERS, BOILED_WARPED_CACTUS;
+    public static final ItemStack[] BREW_OF_FIRE_WARDING, BREW_OF_FIRE_WARDING_GUIDE, BREW_OF_FARSIGHT,
+        BREW_OF_FARSIGHT_GUIDE, BREW_OF_CELERITY, BREW_OF_CELERITY_GUIDE;
 
     static {
         CRIMSON_FRAME = new ItemStack[] {
@@ -160,19 +183,25 @@ public class WildernetherRecipes {
 
         HOGLIN_SPARE_RIB = new ItemStack[] {
             null, null, null,
-            null, new ItemStack(Material.HOGLIN_SPAWN_EGG), null,
+            null, WildernetherStacks.RECIPE_HOGLIN, null,
             null, null, null
         };
 
         HOGLIN_BELLY = new ItemStack[] {
             null, null, null,
-            null, new ItemStack(Material.HOGLIN_SPAWN_EGG), null,
+            null, WildernetherStacks.RECIPE_HOGLIN, null,
             null, null, null
         };
 
         HOGLIN_TROTTERS = new ItemStack[] {
             null, null, null,
-            null, new ItemStack(Material.HOGLIN_SPAWN_EGG), null,
+            null, WildernetherStacks.RECIPE_HOGLIN, null,
+            null, null, null
+        };
+
+        CACTUS_JUICE = new ItemStack[] {
+            WildernetherStacks.WARPED_CACTUS, new ItemStack(Material.GLASS_BOTTLE), null,
+            null, null, null,
             null, null, null
         };
 
@@ -262,6 +291,43 @@ public class WildernetherRecipes {
             WildernetherStacks.WARPED_CACTUS, null, null,
             null, null, null,
             null, null, null
+        };
+
+        // Brews
+        BREW_OF_FIRE_WARDING_GUIDE = new ItemStack[] {
+            WildernetherStacks.SMOLDERING_HERBS, WildernetherStacks.IMMOLATED_VINES, WildernetherStacks.BLAZESPROUT,
+            WildernetherStacks.CRYSTAL_MUSHROOM, null, null,
+            null, WildernetherStacks.WATER_BOTTLE, null
+        };
+
+        BREW_OF_FIRE_WARDING = new ItemStack[] {
+            WildernetherStacks.SMOLDERING_HERBS, WildernetherStacks.IMMOLATED_VINES, WildernetherStacks.BLAZESPROUT,
+            WildernetherStacks.CRYSTAL_MUSHROOM, null, null,
+            null, WildernetherStacks.CACTUS_JUICE, null
+        };
+
+        BREW_OF_FARSIGHT_GUIDE = new ItemStack[] {
+            WildernetherStacks.OCTARINE_NETHERCAP, WildernetherStacks.EMERALD_FIREBLOOM, WildernetherStacks.WARPED_ROSE,
+            WildernetherStacks.CRYSTAL_MUSHROOM, null, null,
+            null, WildernetherStacks.WATER_BOTTLE, null
+        };
+
+        BREW_OF_FARSIGHT = new ItemStack[] {
+            WildernetherStacks.OCTARINE_NETHERCAP, WildernetherStacks.EMERALD_FIREBLOOM, WildernetherStacks.WARPED_ROSE,
+            WildernetherStacks.CRYSTAL_MUSHROOM, null, null,
+            null, WildernetherStacks.CACTUS_JUICE, null
+        };
+
+        BREW_OF_CELERITY_GUIDE = new ItemStack[] {
+            new ItemStack(Material.CRIMSON_FUNGUS), new ItemStack(Material.WARPED_FUNGUS), WildernetherStacks.SHROOMLIGHT_SPORES,
+            WildernetherStacks.CRYSTAL_MUSHROOM, null, null,
+            null, WildernetherStacks.WATER_BOTTLE, null
+        };
+
+        BREW_OF_CELERITY = new ItemStack[] {
+            new ItemStack(Material.CRIMSON_FUNGUS), new ItemStack(Material.WARPED_FUNGUS), WildernetherStacks.SHROOMLIGHT_SPORES,
+            WildernetherStacks.CRYSTAL_MUSHROOM, null, null,
+            null, WildernetherStacks.CACTUS_JUICE, null
         };
     }
 }

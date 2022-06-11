@@ -2,6 +2,8 @@
 
 Wildernether seeks to improve survivability in the nether by adding food and tools that can easily be crafted in the nether
 
+You can find the wiki at [https://github.com/SchnTgaiSpock/Wildernether/wiki](https://github.com/SchnTgaiSpock/Wildernether/wiki)
+
 ## Gathering Resources
 
 The main way to gather resources in Wildernether is by breaking nether plants with Scythes. The plants that you can break are Nether Sprouts, Warped Roots, Warped Fungus, Twisting Vines, Crimson Roots, Crimson Fungus, Weeping Vines, and Shroomlight.
@@ -20,13 +22,11 @@ Wildernether food can be made in the Enhanced Crafting Table and the Blackstone 
 
 ### Cooking in the Blackstone Stove
 
-The Blackstone Stove has three modes: Pot, Frying, and Oven. For pot mode, place a Cauldron on top of the Stove. For Frying mode, place a Heavy Weighted Pressure Plate (Iron Pressure Plate) on top of the Stove. Oven mode is the default.
-
-When using the correct mode and recipe, clicking on the "Click to cook!" button in the Stove's menu will put the cooked item in the output slot.
+The Blackstone Stove has four modes: Pot, Frying, Oven, and Brewing. See the [wiki page](https://github.com/SchnTgaiSpock/Wildernether/wiki/Blackstone-Stove) for more details.
 
 ### Reading the Stove recipes
 
-The top 6 slots in the Simefun Guide correspond to the 6 slots in the Stove. For soup recipes, the bottom-middle item goes in the Bowl slot.
+The top 6 slots in the Simefun Guide correspond to the 6 slots in the Stove. For soup and brewing recipes, the bottom-middle item goes in the container slot to the left.
 
 ## Plans for the Future
 

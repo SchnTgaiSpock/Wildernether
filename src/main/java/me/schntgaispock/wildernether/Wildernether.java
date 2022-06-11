@@ -7,18 +7,18 @@ import javax.annotation.Nonnull;
 import org.bukkit.NamespacedKey;
 
 import io.github.mooy1.infinitylib.core.AbstractAddon;
-import me.schntgaispock.wildernether.slimefun.listeners.Listeners;
-import me.schntgaispock.wildernether.slimefun.managers.ItemManager;
-import me.schntgaispock.wildernether.slimefun.managers.LootManager;
+import me.schntgaispock.wildernether.listeners.Listeners;
+import me.schntgaispock.wildernether.managers.ItemManager;
+import me.schntgaispock.wildernether.managers.LootManager;
 
 public class Wildernether extends AbstractAddon {
 
-    private static Wildernether instance;
+    static Wildernether instance;
 
-    private final Random random = new Random();
+    final Random random = new Random();
 
     public Wildernether() {
-        super("SchnTgaiSpock", "Wildernether", "master", "auto-update");
+        super("SchnTgaiSpock", "Wildernether", "master", "options.auto-update");
     }
 
     public static Wildernether getInstance() {

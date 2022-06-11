@@ -1,4 +1,4 @@
-package me.schntgaispock.wildernether.slimefun.util;
+package me.schntgaispock.wildernether.util;
 
 import java.util.Random;
 

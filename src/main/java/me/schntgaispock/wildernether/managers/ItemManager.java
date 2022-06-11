@@ -1,4 +1,4 @@
-package me.schntgaispock.wildernether.slimefun.managers;
+package me.schntgaispock.wildernether.managers;
 
 
 import org.bukkit.inventory.ItemStack;
@@ -12,10 +12,16 @@ import me.schntgaispock.wildernether.slimefun.WildernetherGroups;
 import me.schntgaispock.wildernether.slimefun.WildernetherRecipes;
 import me.schntgaispock.wildernether.slimefun.WildernetherStacks;
 import me.schntgaispock.wildernether.slimefun.items.BlackstoneStove;
+import me.schntgaispock.wildernether.slimefun.items.NetherComposter;
 import me.schntgaispock.wildernether.slimefun.items.Scythe;
 import me.schntgaispock.wildernether.slimefun.items.WildernetherCuisine;
 import me.schntgaispock.wildernether.slimefun.items.WildernetherPlant;
 
+/**
+ * Item manager for Wildernether
+ * 
+ * @author SchnTgaiSpock
+ */
 public class ItemManager {
 
     public static SlimefunItem CRIMSON_FRAME, WARPED_FRAME, SOUL_STONE,
@@ -34,12 +40,19 @@ public class ItemManager {
     public static SlimefunItem GARDEN_OF_THE_LOST_SOUL, TULIP_OF_PARTINGS, BLOOM_OF_UNHEARD_CRIES,
     BLOSSOM_OF_SOLITUDE, LAMENT_OF_THE_DAMNED;
 
-    public static SlimefunItem HOGLIN_SPARE_RIB, HOGLIN_BELLY, HOGLIN_TROTTERS, HOGLIN_BOUILLON;
+    // Ingredients
+    public static SlimefunItem HOGLIN_SPARE_RIB, HOGLIN_BELLY, HOGLIN_TROTTERS, HOGLIN_BOUILLON, CACTUS_JUICE;
+    // Crafted
     public static SlimefunItem WARPED_SALAD, MUSHROOM_SLICES;
+    // Oven
     public static SlimefunItem BAKED_NETHER_TUBERS, GLOWING_BEANS;
+    // Frying
     public static SlimefunItem NETHER_CHIPS, FRIED_WARPED_FUNGUS, FRIED_CRIMSON_FUNGUS, SPICY_FRIED_LOTUS;
+    // Pot
     public static SlimefunItem CRIMSON_STEW, WARPED_STEW, NETHER_HOTPOT, PORK_BONE_SOUP,
         BOILED_NETHER_TUBERS, BOILED_WARPED_CACTUS;
+    // Brews
+    public static SlimefunItem BREW_OF_FIRE_WARDING, BREW_OF_FARSIGHT, BREW_OF_CELERITY;
 
 
     public static void setup() {
@@ -98,7 +111,7 @@ public class ItemManager {
             WildernetherRecipes.SOUL_SCYTHE
         );
 
-        NETHER_COMPOSTER = new SlimefunItem(
+        NETHER_COMPOSTER = new NetherComposter(
             WildernetherGroups.TOOLS,
             WildernetherStacks.NETHER_COMPOSTER,
             RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -121,7 +134,7 @@ public class ItemManager {
             new ItemStack[9]
         );
 
-        BLAZESPROUT = new WildernetherPlant(
+        BLAZESPROUT = new SlimefunItem(
             WildernetherGroups.PLANTS,
             WildernetherStacks.BLAZESPROUT,
             WildernetherRecipes.RecipeTypes.BREAK_NETHER_PLANTS,
@@ -263,21 +276,21 @@ public class ItemManager {
         HOGLIN_SPARE_RIB = new UnplaceableBlock(
             WildernetherGroups.CUISINE,
             WildernetherStacks.HOGLIN_SPARE_RIB,
-            RecipeType.MOB_DROP,
+            WildernetherRecipes.RecipeTypes.KILL_MOB,
             WildernetherRecipes.HOGLIN_SPARE_RIB
         );
 
         HOGLIN_BELLY = new UnplaceableBlock(
             WildernetherGroups.CUISINE,
             WildernetherStacks.HOGLIN_BELLY,
-            RecipeType.MOB_DROP,
+            WildernetherRecipes.RecipeTypes.KILL_MOB,
             WildernetherRecipes.HOGLIN_BELLY
         );
 
         HOGLIN_TROTTERS = new UnplaceableBlock(
             WildernetherGroups.CUISINE,
             WildernetherStacks.HOGLIN_TROTTERS,
-            RecipeType.MOB_DROP,
+            WildernetherRecipes.RecipeTypes.KILL_MOB,
             WildernetherRecipes.HOGLIN_TROTTERS
         );
 
@@ -295,6 +308,13 @@ public class ItemManager {
             WildernetherRecipes.BOILED_WARPED_CACTUS,
             2,
             2.0
+        );
+
+        CACTUS_JUICE = new UnplaceableBlock(
+            WildernetherGroups.CUISINE,
+            WildernetherStacks.CACTUS_JUICE,
+            RecipeType.ENHANCED_CRAFTING_TABLE,
+            WildernetherRecipes.CACTUS_JUICE
         );
 
         // Crafted
@@ -418,9 +438,34 @@ public class ItemManager {
             5.0
         );
 
+        // Brews
+        BREW_OF_FIRE_WARDING = new SlimefunItem(
+            WildernetherGroups.BREWS,
+            WildernetherStacks.BREW_OF_FIRE_WARDING,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_BREWING,
+            WildernetherRecipes.BREW_OF_FIRE_WARDING_GUIDE
+        );
+        
+        BREW_OF_FARSIGHT = new SlimefunItem(
+            WildernetherGroups.BREWS,
+            WildernetherStacks.BREW_OF_FARSIGHT,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_BREWING,
+            WildernetherRecipes.BREW_OF_FARSIGHT_GUIDE
+        );
+        
+        BREW_OF_CELERITY = new SlimefunItem(
+            WildernetherGroups.BREWS,
+            WildernetherStacks.BREW_OF_CELERITY,
+            WildernetherRecipes.RecipeTypes.BLACKSTONE_STOVE_BREWING,
+            WildernetherRecipes.BREW_OF_CELERITY_GUIDE
+        );
+
+
+
         // ---------- Registration ----------
         FUNGAL_IRON_SCRAP.setUseableInWorkbench(true);
         FUNGAL_GOLD_SCRAP.setUseableInWorkbench(true);
+        CACTUS_JUICE.setUseableInWorkbench(true);
         
         GARDEN_OF_THE_LOST_SOUL.setHidden(true);
         TULIP_OF_PARTINGS.setHidden(true);
@@ -428,11 +473,13 @@ public class ItemManager {
         BLOSSOM_OF_SOLITUDE.setHidden(true);
         LAMENT_OF_THE_DAMNED.setHidden(true);
 
-
         // ----- Materials -----
         CRIMSON_FRAME.register(wn);
-        WARPED_FRAME.register(wn);
+        // This doesn't have any uses atm, so disabling
+        // WARPED_FRAME.register(wn);
         SOUL_STONE.register(wn);
+        FUNGAL_IRON_SCRAP.register(wn);
+        FUNGAL_GOLD_SCRAP.register(wn);
 
         // ----- Tools -----
         BLACKSTONE_SCYTHE.register(wn);
@@ -471,6 +518,7 @@ public class ItemManager {
         HOGLIN_TROTTERS.register(wn);
         BOILED_WARPED_CACTUS.register(wn);
         HOGLIN_BOUILLON.register(wn);
+        CACTUS_JUICE.register(wn);
 
         WARPED_SALAD.register(wn);
         MUSHROOM_SLICES.register(wn);
@@ -488,5 +536,10 @@ public class ItemManager {
         NETHER_HOTPOT.register(wn);
         PORK_BONE_SOUP.register(wn);
         BOILED_NETHER_TUBERS.register(wn);
+
+        // ----- Brews -----
+        BREW_OF_FIRE_WARDING.register(wn);
+        BREW_OF_FARSIGHT.register(wn);
+        BREW_OF_CELERITY.register(wn);
     }
 }

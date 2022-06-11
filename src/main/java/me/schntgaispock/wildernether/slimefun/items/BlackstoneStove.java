@@ -1,11 +1,15 @@
 package me.schntgaispock.wildernether.slimefun.items;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.infinitylib.machines.MenuBlock;
@@ -17,12 +21,16 @@ import lombok.Getter;
 import lombok.Setter;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import me.schntgaispock.wildernether.slimefun.util.Theme;
+import me.schntgaispock.wildernether.slimefun.WildernetherRecipes;
+import me.schntgaispock.wildernether.slimefun.recipes.RecipeCollection;
+import me.schntgaispock.wildernether.slimefun.recipes.StoveRecipe;
+import me.schntgaispock.wildernether.util.GeneralUtil;
+import me.schntgaispock.wildernether.util.Theme;
 
 public class BlackstoneStove extends MenuBlock {
 
     public enum Mode {
-        Oven, Frying, Pot
+        Oven, Frying, Pot, Brewing
     }
 
     public static final int[] GUI_BACKGROUND_SLOTS = {
@@ -44,17 +52,18 @@ public class BlackstoneStove extends MenuBlock {
     public static final int OUTPUT_SLOT = 25;
     public static final String COOK_CONFIRM_NAME = "Click to cook!";
 
-    public static final ItemStack BOWL_BORDER_ITEM = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE, "&9Bowl");
+    public static final ItemStack BOWL_BORDER_ITEM = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE, "&9Container");
     public static final ItemStack RECIPE_BORDER_ITEM = new CustomItemStack(Material.CAMPFIRE, Theme.CUISINE.getColor() + "Recipe");
     
     @Getter
     @Setter
-    private Mode mode;
+    Mode mode;
 
     @ParametersAreNonnullByDefault
     public BlackstoneStove(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc) {
         this(ig, is, rt, rc, Mode.Oven);
     }
+
     @ParametersAreNonnullByDefault
     public BlackstoneStove(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc, Mode mode) {
         super(ig, is, rt, rc);
@@ -93,24 +102,112 @@ public class BlackstoneStove extends MenuBlock {
                 return;
             }
 
-            Mode stoveMode = Mode.Oven;
             Block blockOnTop = b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ());
 
             switch (blockOnTop.getType()) {
                 case CAULDRON:
-                    stoveMode = Mode.Pot;
+                case LAVA_CAULDRON:
+                case WATER_CAULDRON:
+                case POWDER_SNOW_CAULDRON:
+                    this.mode = Mode.Pot;
                     break;
 
                 case HEAVY_WEIGHTED_PRESSURE_PLATE:
-                    stoveMode = Mode.Frying;
+                    this.mode = Mode.Frying;
+                    break;
+
+                case LIGHT_WEIGHTED_PRESSURE_PLATE:
+                    this.mode = Mode.Brewing;
                     break;
             
                 default:
+                    this.mode = Mode.Oven;
                     break;
             }
 
-            player.getOpenInventory().getTopInventory().setItem(49, getCraftConfirmItem(stoveMode));
+            player.getOpenInventory().getTopInventory().setItem(49, getCraftConfirmItem(this.mode));
         });
+
+        
+        menu.addMenuClickHandler(COOK_SLOT, (Player player, int clickedSlot, ItemStack clickedItem, me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction action) -> {
+
+            Inventory inv = player.getOpenInventory().getTopInventory();
+
+            // Parse recipe, check if in existing recipes
+            ItemStack[] currentRecipe = new ItemStack[9];
+            for (int i = 0; i < 6; i++) {
+                int slot = BlackstoneStove.RECIPE_SLOTS[i];
+                currentRecipe[i] = inv.getItem(slot);
+            }
+            currentRecipe[7] = inv.getItem(BlackstoneStove.BOWL_SLOT);
+
+            RecipeCollection<StoveRecipe> recipeCollection;
+            switch (this.mode) {
+                case Frying:
+                    recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_FRYING;
+                    break;
+                    
+                case Pot:
+                    recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_POT;
+                    break;
+                    
+                case Brewing:
+                    recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_BREWING;
+                    break;
+
+                default:
+                    recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_OVEN;
+                    break;
+            }
+
+            ItemStack recipeOutput = recipeCollection.getOrNull(currentRecipe);
+            if (recipeOutput == null) {
+                player.sendMessage(Theme.CUISINE.getColor() + "Invalid " + this.mode.toString().toLowerCase() + " recipe!");
+                return false;
+            }
+
+            // Put output in output slot if there is space
+            int outputSlot = BlackstoneStove.OUTPUT_SLOT;
+            ItemStack currentlyInOutput = inv.getItem(outputSlot);
+
+            
+            if (currentlyInOutput == null) {
+                // Success
+                inv.setItem(outputSlot, recipeOutput.clone());
+            } else if (recipeOutput.isSimilar(currentlyInOutput)) {
+                // Failure
+                if (currentlyInOutput.getMaxStackSize() == currentlyInOutput.getAmount()) {
+                    player.sendMessage(Theme.CUISINE.getColor() + "Output is full!");
+                    return false;
+                }
+                // Success
+                currentlyInOutput.setAmount(currentlyInOutput.getAmount() + 1);
+            
+            // Failure
+            } else {
+                player.sendMessage(Theme.CUISINE.getColor() + "Output is occupied!");
+                return false;
+            }
+
+            // Reduce input items by 1, gives buckets and bowls back
+            for (int i = 0; i < 8; i++) {
+                ItemStack item = currentRecipe[i];
+                if (item != null) {
+                    item.setAmount(item.getAmount() - 1);
+                    ItemStack returnItem = (i == 7) ? GeneralUtil.returnItemAfterUsing(item) : null;
+
+                    Map<Integer, ItemStack> leftOvers = new HashMap<Integer, ItemStack>();
+                    if (returnItem != null &&
+                        !(leftOvers = player.getInventory().addItem(returnItem)).isEmpty() &&
+                        !(leftOvers = inv.addItem(leftOvers.get(0))).isEmpty()) {
+                        player.getWorld().dropItemNaturally(player.getLocation(), leftOvers.get(0));
+                    }
+                }
+            }
+
+            return false;
+        });
+
         super.onNewInstance(menu, b);
     }
 }

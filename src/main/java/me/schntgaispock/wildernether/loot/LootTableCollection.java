@@ -1,4 +1,4 @@
-package me.schntgaispock.wildernether.slimefun.util;
+package me.schntgaispock.wildernether.loot;
 
 import java.util.HashMap;
 import java.util.Map;

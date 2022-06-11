@@ -1,5 +1,9 @@
 package me.schntgaispock.wildernether.slimefun.items;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Sound;
@@ -7,6 +11,7 @@ import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
@@ -14,27 +19,37 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
-import me.schntgaispock.wildernether.slimefun.util.GeneralUtil;
+import me.schntgaispock.wildernether.util.GeneralUtil;
 
 public class WildernetherCuisine extends SlimefunItem {
 
-    int hunger;
-    float saturation;
+    /**
+     * Dataclass for effects granted by eating Wildernether cuisine
+     */
+
+    int hunger = 1;
+    float saturation = 1;
+    List<PotionEffect> effects = new ArrayList<>();
 
     @ParametersAreNonnullByDefault
     public WildernetherCuisine(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc) {
-        this(ig, is, rt, rc, 1);
+        super(ig, is, rt, rc);
     }
 
     @ParametersAreNonnullByDefault
     public WildernetherCuisine(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc, int hunger) {
-        this(ig, is, rt, rc, hunger, 1);
+        this(ig, is, rt, rc);
+        this.hunger = hunger;
     }
 
     public WildernetherCuisine(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc, int hunger, double saturation) {
-        super(ig, is, rt, rc);
-        this.hunger = hunger;
+        this(ig, is, rt, rc, hunger);
         this.saturation = (float) saturation;
+    }
+
+    public WildernetherCuisine(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc, int hunger, double saturation, PotionEffect... effects) {
+        this(ig, is, rt, rc, hunger, saturation);
+        this.effects.addAll(Arrays.asList(effects));
     }
 
     @Override
@@ -44,12 +59,12 @@ public class WildernetherCuisine extends SlimefunItem {
 
     @EventHandler
     public void onRightClick(PlayerRightClickEvent e) {
+        e.cancel();
 
         Player p = e.getPlayer();
 
         // Full
         if (p.getFoodLevel() > 19) {
-            e.cancel();
             return;
         }
 
@@ -57,6 +72,11 @@ public class WildernetherCuisine extends SlimefunItem {
 
         p.setFoodLevel(Math.min(p.getFoodLevel() + this.hunger, 20));
         p.setSaturation(p.getSaturation() + this.saturation);
+        if (!this.effects.isEmpty()) {
+            for (PotionEffect effect : effects) {
+                p.addPotionEffect(effect);
+            }
+        }
 
         ItemStack food = e.getItem();
         ItemStack returnItem = GeneralUtil.returnItemAfterUsing(food);
