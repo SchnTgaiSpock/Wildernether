@@ -18,6 +18,11 @@ import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.slimefun.WildernetherStacks;
 import me.schntgaispock.wildernether.util.Calc;
 
+/**
+ * Adds drops to hoglins
+ * 
+ * @author SchnTgaiSpock
+ */
 public class HoglinKillListener implements Listener {
 
     @EventHandler

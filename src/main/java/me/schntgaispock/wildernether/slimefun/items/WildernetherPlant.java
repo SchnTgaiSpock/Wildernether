@@ -9,6 +9,11 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 
+/**
+ * Might add more functionality in the future
+ * 
+ * @author SchnTgaiSpock
+ */
 public class WildernetherPlant extends UnplaceableBlock {
     
     @ParametersAreNonnullByDefault

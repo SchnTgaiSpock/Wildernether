@@ -14,6 +14,11 @@ import org.bukkit.potion.PotionType;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
+/**
+ * Various item generators
+ * 
+ * @author SchnTgaiSpock
+ */
 public class ItemUtil {
 
     static Pattern spacePattern = Pattern.compile(" ");

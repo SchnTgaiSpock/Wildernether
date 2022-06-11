@@ -3,7 +3,9 @@ package me.schntgaispock.wildernether.loot;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -27,6 +29,7 @@ public class LootTable {
      * Creates a new {@link LootTable} with specified name
      * @param name The name of the {@link LootTable}
      */
+    @ParametersAreNonnullByDefault
     public LootTable(String name, ItemStack[][] loot) {
         this.name = name;
         this.loot = loot;
@@ -39,7 +42,7 @@ public class LootTable {
      * @return The corresponding {@link LootTableDistribution}, or null if the key `toolName` does not exist
      */
     @Nullable
-    public LootTableDistribution getDistribution(String toolName) {
+    public LootTableDistribution getDistribution(@Nonnull String toolName) {
         return this.lootTableDistributions.get(toolName);
     }
 
@@ -51,10 +54,11 @@ public class LootTable {
      * @param loot An array of length 4 (one for each {@link RarityRate})
      * @return The modified {@link LootTable}
      */
-    public LootTable newDistribution(String toolName) {
+    public LootTable newDistribution(@Nonnull String toolName) {
         return newDistribution(toolName, new double[]{ 1.0, 1.0, 1.0, 1.0, 1.0 });
     }
 
+    @ParametersAreNonnullByDefault
     public LootTable newDistribution(String toolName, double[] multipliers) {
         final LootTableDistribution dist = new LootTableDistribution();
         int counter = 0;
@@ -72,7 +76,7 @@ public class LootTable {
         return this;
     }
 
-    public ItemStack getDrop(String toolName) {
+    public ItemStack getDrop(@Nonnull String toolName) {
         return this.collapsedLoot[this.lootTableDistributions.get(toolName).getDrop()].clone();
     }
     

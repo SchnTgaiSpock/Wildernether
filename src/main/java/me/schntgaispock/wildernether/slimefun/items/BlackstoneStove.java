@@ -27,6 +27,11 @@ import me.schntgaispock.wildernether.slimefun.recipes.StoveRecipe;
 import me.schntgaispock.wildernether.util.GeneralUtil;
 import me.schntgaispock.wildernether.util.Theme;
 
+/**
+ * See the <a href="https://github.com/SchnTgaiSpock/Wildernether/wiki/Blackstone-Stove">Blackstone Stove wiki</a> for more details
+ * 
+ * @author SchnTgaiSpock
+ */
 public class BlackstoneStove extends MenuBlock {
 
     public enum Mode {
@@ -95,6 +100,7 @@ public class BlackstoneStove extends MenuBlock {
 
     @Override
     @SuppressWarnings("deprecation")
+    @ParametersAreNonnullByDefault
     protected void onNewInstance(BlockMenu menu, Block b) {
         menu.addMenuOpeningHandler((Player player) -> {
 

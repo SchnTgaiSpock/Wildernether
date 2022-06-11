@@ -6,6 +6,11 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
+/**
+ * Utility class for recipes
+ * 
+ * @author SchnTgaiSpock
+ */
 public class RecipeUtil {
 
     public static int recipeHash(@Nonnull ItemStack[] recipe) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Sound;
@@ -42,11 +43,13 @@ public class WildernetherCuisine extends SlimefunItem {
         this.hunger = hunger;
     }
 
+    @ParametersAreNonnullByDefault
     public WildernetherCuisine(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc, int hunger, double saturation) {
         this(ig, is, rt, rc, hunger);
         this.saturation = (float) saturation;
     }
 
+    @ParametersAreNonnullByDefault
     public WildernetherCuisine(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc, int hunger, double saturation, PotionEffect... effects) {
         this(ig, is, rt, rc, hunger, saturation);
         this.effects.addAll(Arrays.asList(effects));
@@ -58,7 +61,7 @@ public class WildernetherCuisine extends SlimefunItem {
     }
 
     @EventHandler
-    public void onRightClick(PlayerRightClickEvent e) {
+    public void onRightClick(@Nonnull PlayerRightClickEvent e) {
         e.cancel();
 
         Player p = e.getPlayer();

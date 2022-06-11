@@ -11,6 +11,9 @@ import me.schntgaispock.wildernether.listeners.Listeners;
 import me.schntgaispock.wildernether.managers.ItemManager;
 import me.schntgaispock.wildernether.managers.LootManager;
 
+/**
+ * See the <a href="https://github.com/SchnTgaiSpock/Wildernether/wiki">Wildernether wiki</a> for more info about the addon
+ */
 public class Wildernether extends AbstractAddon {
 
     static Wildernether instance;

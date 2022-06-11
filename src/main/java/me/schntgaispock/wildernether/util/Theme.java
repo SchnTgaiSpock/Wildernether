@@ -3,6 +3,9 @@ package me.schntgaispock.wildernether.util;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
 
+/*
+ * Color themes for Wildernether items
+ */
 @Getter
 public enum Theme {
     CRIMSON(ChatColor.of("#9e355a")),
