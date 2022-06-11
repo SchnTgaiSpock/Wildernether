@@ -67,7 +67,7 @@ public class Scythe extends SlimefunItem {
             // To prevent players from just breaking and replanting for items
             e.setDropItems(false);
 
-            if (Calc.flip(1/3)) {
+            if (Calc.flip(1/3.0)) {
                 ItemStack toDrop = lootTable.getDrop(tool.getId());
                 toDrop.setAmount(Calc.clamp(1, fortune, 5));
                 e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), toDrop);
