@@ -194,7 +194,7 @@ public class BlackstoneStove extends MenuBlock {
                 ItemStack item = currentRecipe[i];
                 if (item != null) {
                     item.setAmount(item.getAmount() - 1);
-                    ItemStack returnItem = (i == 7) ? GeneralUtil.returnItemAfterUsing(item) : null;
+                    ItemStack returnItem = (i != 7) ? GeneralUtil.returnItemAfterUsing(item) : null;
 
                     Map<Integer, ItemStack> leftOvers = new HashMap<Integer, ItemStack>();
                     if (returnItem != null &&
