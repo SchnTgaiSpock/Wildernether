@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a Bug or an Issue with this Plugin.
+about: Report a Bug or an Issue with Wildernether.
 title: ''
 labels: bug
 assignees: ''
@@ -27,7 +27,7 @@ assignees: ''
 <!-- "latest" IS NOT A VERSION NUMBER. -->
 <!-- You can also just run "/sf versions" and show us a screenshot of that. -->
 
- - Minecraft Version:
- - CS-CoreLib Version:
- - Slimefun Version:
- - Plugin Version: 
+- Minecraft Version:
+- CS-CoreLib Version:
+- Slimefun Version:
+- Plugin Version:
