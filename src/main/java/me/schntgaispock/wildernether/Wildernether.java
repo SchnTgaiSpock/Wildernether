@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
 
 import io.github.mooy1.infinitylib.core.AbstractAddon;
@@ -33,6 +34,7 @@ public class Wildernether extends AbstractAddon {
     }
 
     @Override
+    @SuppressWarnings("unused")
     public void enable() {
         instance = this;
 
@@ -43,6 +45,9 @@ public class Wildernether extends AbstractAddon {
         ItemManager.setup();
         LootManager.setup();
         Listeners.setup();
+
+        // Might do more with this later idk
+        Metrics metrics = new Metrics(this, 15487);
     }
 
     @Override
