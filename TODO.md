@@ -1,6 +1,6 @@
 # To-do list / Roadmap
 
-## Next update - v1.2.0
+## Next update - v1.1.0
 
 These will be completed and added next update
 
