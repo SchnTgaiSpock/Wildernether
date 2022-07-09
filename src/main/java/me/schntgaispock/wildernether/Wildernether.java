@@ -2,6 +2,8 @@ package me.schntgaispock.wildernether;
 
 import java.util.Random;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.annotation.Nonnull;
 
 import org.bstats.bukkit.Metrics;
@@ -19,7 +21,7 @@ public class Wildernether extends AbstractAddon {
 
     static Wildernether instance;
 
-    final Random random = new Random();
+    final Random random = ThreadLocalRandom.current();
 
     public Wildernether() {
         super("SchnTgaiSpock", "Wildernether", "master", "options.auto-update");

@@ -56,6 +56,10 @@ public class ItemManager {
 
 
     public static void setup() {
+
+        Scythe.setup();
+
+
         SlimefunAddon wn = Wildernether.getInstance();
 
         WildernetherGroups.WILDERNETHER.register(wn);

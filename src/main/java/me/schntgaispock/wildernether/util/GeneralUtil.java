@@ -7,6 +7,8 @@ import javax.annotation.Nullable;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import me.schntgaispock.wildernether.Wildernether;
+
 public class GeneralUtil {
     
     @Nullable
@@ -52,5 +54,37 @@ public class GeneralUtil {
             }
         }
         return l;
+    }
+
+    public static int pickRandomIndexFromWeightedArrayAndTotal(double[] array, double total) {
+        int i = 0;
+        double r = Wildernether.getInstance().getRandom().nextDouble() * total;
+        while (r > array[i]) {
+            r -= array[i++];
+        }
+        return i;
+    }
+
+    public static <T> @Nullable T pickRandomElementFromUnweightedList(T[] array) {
+        if (array.length < 1) {
+            return null;
+        }
+        return array[Wildernether.getInstance().getRandom().nextInt(array.length)];
+    }
+
+    public static double sum(double[] array) {
+        double total = 0;
+        for (double t : array) {
+            total += t;
+        }
+        return total;
+    }
+
+    public static double[] zipMult(double[] a1, double[] a2) {
+        double[] r = new double[a1.length];
+        for (int i = 0; i < a1.length; i++) {
+            r[i] = a1[i] * a2[i];
+        }
+        return r;
     }
 }

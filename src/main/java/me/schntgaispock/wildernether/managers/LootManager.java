@@ -1,9 +1,11 @@
 package me.schntgaispock.wildernether.managers;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.mooy1.infinitylib.core.AddonConfig;
 import lombok.Getter;
-import me.schntgaispock.wildernether.loot.LootTable;
+import me.schntgaispock.wildernether.Wildernether;
 import me.schntgaispock.wildernether.loot.LootTableCollection;
 import me.schntgaispock.wildernether.slimefun.WildernetherStacks;
 
@@ -13,32 +15,29 @@ import me.schntgaispock.wildernether.slimefun.WildernetherStacks;
  * @author SchnTgaiSpock
  */
 public class LootManager {
-
-    /**
-     * Weights based on rarity
-     */
-    public static enum RarityRate {        
-        COMMON(500.0, 0), UNCOMMON(50.0, 1), RARE(5.0, 2), SECRET(0.5, 3);
-
-        @Getter double rate;
-        @Getter int n;
-
-        RarityRate(double r, int n) {
-            this.rate = r;
-            this.n = n;
-        }
-    }
     
     @Getter
     final static LootTableCollection netherPlantHarvest = new LootTableCollection();
 
     public static void setup() {
+        AddonConfig config = Wildernether.getInstance().getConfig();
 
-        final double[] SOUL_SCYTHE_MULIPLIERS = new double[]{ 1.0, 1.0, 1.0, 1.0, 3.0 };
-
-        netherPlantHarvest.put(
-            "NETHER_SPROUTS",
-            new LootTable("NETHER_SPROUTS_HARVEST",
+        netherPlantHarvest
+            .setDefaultRates(new double[]{
+                config.getDouble("plant-harvest.drop-weights.common", 1000.0),
+                config.getDouble("plant-harvest.drop-weights.uncommon", 100.0),
+                config.getDouble("plant-harvest.drop-weights.rare", 10.0),
+                config.getDouble("plant-harvest.drop-weights.secret", 1.0)
+            })
+            .addTool("BLACKSTONE_SCYTHE")
+            .addTool("SOUL_SCYTHE", new double[]{
+                config.getDouble("soul-scythe.weight-multipliers.common", 1.0),
+                config.getDouble("soul-scythe.weight-multipliers.uncommon", 1.0),
+                config.getDouble("soul-scythe.weight-multipliers.rare", 1.0),
+                config.getDouble("soul-scythe.weight-multipliers.secret", 1.0)
+            })
+            .put(
+                Material.NETHER_SPROUTS,
                 new ItemStack[][] {
                     {
                         WildernetherStacks.BLAZESPROUT,
@@ -52,12 +51,8 @@ public class LootManager {
                         WildernetherStacks.GARDEN_OF_THE_LOST_SOUL,
                     }
                 }
-            ).newDistribution("BLACKSTONE_SCYTHE")
-            .newDistribution("SOUL_SCYTHE", SOUL_SCYTHE_MULIPLIERS)
-        ).put(
-            "WARPED_ROOTS",
-            new LootTable(
-                "WARPED_ROOTS_HARVEST",
+            ).put(
+                Material.WARPED_ROOTS,
                 new ItemStack[][] {
                     {
                         WildernetherStacks.WARPED_CACTUS,
@@ -74,12 +69,8 @@ public class LootManager {
                         WildernetherStacks.TULIP_OF_PARTINGS
                     }
                 }
-            ).newDistribution("BLACKSTONE_SCYTHE")
-            .newDistribution("SOUL_SCYTHE", SOUL_SCYTHE_MULIPLIERS)
-        ).put(
-            "WARPED_FUNGUS",
-            new LootTable(
-                "WARPED_FUNGUS_HARVEST",
+            ).put(
+                Material.WARPED_FUNGUS,
                 new ItemStack[][] {
                     {
                         WildernetherStacks.WARPED_CACTUS,
@@ -94,12 +85,8 @@ public class LootManager {
                         WildernetherStacks.TULIP_OF_PARTINGS
                     }
                 }
-            ).newDistribution("BLACKSTONE_SCYTHE")
-            .newDistribution("SOUL_SCYTHE", SOUL_SCYTHE_MULIPLIERS)
-        ).put(
-            "TWISTING_VINES",
-            new LootTable(
-                "TWISTING_VINES_HARVEST",
+            ).put(
+                Material.TWISTING_VINES,
                 new ItemStack[][] {
                     {
                         WildernetherStacks.WARPED_CACTUS
@@ -112,12 +99,8 @@ public class LootManager {
                         WildernetherStacks.BLOOM_OF_UNHEARD_CRIES
                     }
                 }
-            ).newDistribution("BLACKSTONE_SCYTHE")
-            .newDistribution("SOUL_SCYTHE", SOUL_SCYTHE_MULIPLIERS)
-        ).put(
-            "CRIMSON_ROOTS",
-            new LootTable(
-                "CRIMSON_ROOTS_HARVEST",
+            ).put(
+                Material.CRIMSON_ROOTS,
                 new ItemStack[][] {
                     {
                         WildernetherStacks.BLAZESPROUT,
@@ -132,12 +115,8 @@ public class LootManager {
                         WildernetherStacks.BLOSSOM_OF_SOLITUDE,
                     }
                 }
-            ).newDistribution("BLACKSTONE_SCYTHE")
-            .newDistribution("SOUL_SCYTHE", SOUL_SCYTHE_MULIPLIERS)
-        ).put(
-            "CRIMSON_FUNGUS",
-            new LootTable(
-                "CRIMSON_FUNGUS_HARVEST",
+            ).put(
+                Material.CRIMSON_FUNGUS,
                 new ItemStack[][] {
                     {
                         WildernetherStacks.CRYSTAL_MUSHROOM
@@ -151,12 +130,8 @@ public class LootManager {
                         WildernetherStacks.GARDEN_OF_THE_LOST_SOUL
                     }
                 }
-            ).newDistribution("BLACKSTONE_SCYTHE")
-            .newDistribution("SOUL_SCYTHE", SOUL_SCYTHE_MULIPLIERS)
-        ).put(
-            "WEEPING_VINES",
-            new LootTable(
-                "WEEPING_VINES_HARVEST",
+            ).put(
+                Material.WEEPING_VINES,
                 new ItemStack[][] {
                     {
                         WildernetherStacks.SHROOMLIGHT_SPORES
@@ -170,12 +145,8 @@ public class LootManager {
                         WildernetherStacks.LAMENT_OF_THE_DAMNED
                     }
                 }
-            ).newDistribution("BLACKSTONE_SCYTHE")
-            .newDistribution("SOUL_SCYTHE", SOUL_SCYTHE_MULIPLIERS)
-        ).put(
-            "SHROOMLIGHT",
-            new LootTable(
-                "SHROOMLIGHT_HARVEST",
+            ).put(
+                Material.SHROOMLIGHT,
                 new ItemStack[][] {
                     {
                         WildernetherStacks.SHROOMLIGHT_SPORES
@@ -183,9 +154,7 @@ public class LootManager {
                         WildernetherStacks.BLOOM_OF_UNHEARD_CRIES
                     }
                 }
-            ).newDistribution("BLACKSTONE_SCYTHE")
-            .newDistribution("SOUL_SCYTHE", SOUL_SCYTHE_MULIPLIERS)
-        );
+            );
     }
 
 }

@@ -3,6 +3,7 @@ package me.schntgaispock.wildernether.slimefun.items;
 import java.util.List;
 import java.util.logging.Level;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.event.EventHandler;
@@ -15,12 +16,17 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
 import me.schntgaispock.wildernether.Wildernether;
-import me.schntgaispock.wildernether.loot.LootTable;
 import me.schntgaispock.wildernether.loot.LootTableCollection;
 import me.schntgaispock.wildernether.managers.LootManager;
 import me.schntgaispock.wildernether.util.Calc;
 
 public class Scythe extends SlimefunItem {
+
+    private static double plantDropChance;
+
+    public static void setup() {
+        plantDropChance = Wildernether.getInstance().getConfig().getDouble("plant-harvest.drop-chance", 0.3);
+    }
 
     @ParametersAreNonnullByDefault
     public Scythe(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc) {
@@ -58,17 +64,16 @@ public class Scythe extends SlimefunItem {
                 return;
         }
 
-        final LootTable lootTable = netherPlantHarvestLoot
-            .getLootTables()
-            .get(e.getBlock().getType().toString());
-
-        if (lootTable != null) {
+        if (netherPlantHarvestLoot.hasTable(e.getBlock().getType())) {
 
             // To prevent players from just breaking and replanting for items
             e.setDropItems(false);
 
-            if (Calc.flip(1/3.0)) {
-                ItemStack toDrop = lootTable.getDrop(tool.getId());
+            if (Calc.flip(Scythe.plantDropChance)) {
+                @Nullable ItemStack toDrop = netherPlantHarvestLoot.getDrop(e.getBlock().getType(), tool.getId());
+                if (toDrop == null) {
+                    return;
+                }
                 toDrop.setAmount(Calc.clamp(1, fortune, 5));
                 e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), toDrop);
             }
