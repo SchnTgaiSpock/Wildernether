@@ -10,6 +10,7 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
 
 import io.github.mooy1.infinitylib.core.AbstractAddon;
+import me.schntgaispock.wildernether.integration.SlimeHUDSetup;
 import me.schntgaispock.wildernether.listeners.Listeners;
 import me.schntgaispock.wildernether.managers.ItemManager;
 import me.schntgaispock.wildernether.managers.LootManager;
@@ -50,6 +51,17 @@ public class Wildernether extends AbstractAddon {
 
         // Might do more with this later idk
         Metrics metrics = new Metrics(this, 15487);
+
+        if (getInstance().getServer().getPluginManager().isPluginEnabled("SlimeHUD")) {
+            try {
+                getLogger().info("SlimeHUD was found on this server!");
+                getLogger().info("Setting up Wildernether for SlimeHUD...");
+                SlimeHUDSetup.setup();
+            } catch (NoClassDefFoundError e) {
+                getLogger().warning("This server is using an old version of SlimeHUD that is incompatitable with this version of Wildernether.");
+                getLogger().warning("Please update SlimeHUD to version 1.2.0 or higher!");
+            }
+        }
     }
 
     @Override

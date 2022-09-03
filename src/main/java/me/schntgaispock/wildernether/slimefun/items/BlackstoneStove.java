@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -17,8 +18,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import lombok.Getter;
-import lombok.Setter;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.schntgaispock.wildernether.slimefun.WildernetherRecipes;
@@ -59,24 +58,33 @@ public class BlackstoneStove extends MenuBlock {
 
     public static final ItemStack BOWL_BORDER_ITEM = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE, "&9Container");
     public static final ItemStack RECIPE_BORDER_ITEM = new CustomItemStack(Material.CAMPFIRE, Theme.CUISINE.getColor() + "Recipe");
-    
-    @Getter
-    @Setter
-    Mode mode;
 
     @ParametersAreNonnullByDefault
     public BlackstoneStove(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc) {
-        this(ig, is, rt, rc, Mode.Oven);
-    }
-
-    @ParametersAreNonnullByDefault
-    public BlackstoneStove(ItemGroup ig, SlimefunItemStack is, RecipeType rt, ItemStack[] rc, Mode mode) {
         super(ig, is, rt, rc);
-        this.mode = mode;
     }
 
     public static ItemStack getCraftConfirmItem(@Nonnull Mode mode) {
         return new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, "&a" + COOK_CONFIRM_NAME, "&7Mode: &f" + mode.toString());
+    }
+
+    public static Mode getMode(Location l) {
+        if (l.getBlockY() == 320) {
+            return Mode.Oven;
+        }
+
+        Block blockOnTop = l.getWorld().getBlockAt(l.getBlockX(), l.getBlockY() + 1, l.getBlockZ());
+
+        return switch (blockOnTop.getType()) {
+            case CAULDRON, LAVA_CAULDRON, WATER_CAULDRON, POWDER_SNOW_CAULDRON -> Mode.Pot;
+            case HEAVY_WEIGHTED_PRESSURE_PLATE -> Mode.Frying;
+            case LIGHT_WEIGHTED_PRESSURE_PLATE -> Mode.Brewing;
+            default -> Mode.Oven;
+        };
+    }
+
+    public static Mode getMode(Block b) {
+        return getMode(b.getLocation());
     }
 
     @Override
@@ -85,7 +93,7 @@ public class BlackstoneStove extends MenuBlock {
         preset.drawBackground(BOWL_BORDER_ITEM, GUI_BOWL_SLOTS);
         preset.drawBackground(RECIPE_BORDER_ITEM, GUI_RECIPE_SLOTS);
         preset.drawBackground(OUTPUT_BORDER, GUI_OUTPUT_SLOTS);
-        preset.drawBackground(getCraftConfirmItem(this.mode), GUI_COOK_SLOTS);
+        preset.drawBackground(getCraftConfirmItem(Mode.Oven), GUI_COOK_SLOTS);
     }
 
     @Override
@@ -103,35 +111,7 @@ public class BlackstoneStove extends MenuBlock {
     @ParametersAreNonnullByDefault
     protected void onNewInstance(BlockMenu menu, Block b) {
         menu.addMenuOpeningHandler((Player player) -> {
-
-            if (b.getY() == 320) {
-                return;
-            }
-
-            Block blockOnTop = b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ());
-
-            switch (blockOnTop.getType()) {
-                case CAULDRON:
-                case LAVA_CAULDRON:
-                case WATER_CAULDRON:
-                case POWDER_SNOW_CAULDRON:
-                    this.mode = Mode.Pot;
-                    break;
-
-                case HEAVY_WEIGHTED_PRESSURE_PLATE:
-                    this.mode = Mode.Frying;
-                    break;
-
-                case LIGHT_WEIGHTED_PRESSURE_PLATE:
-                    this.mode = Mode.Brewing;
-                    break;
-            
-                default:
-                    this.mode = Mode.Oven;
-                    break;
-            }
-
-            player.getOpenInventory().getTopInventory().setItem(49, getCraftConfirmItem(this.mode));
+            player.getOpenInventory().getTopInventory().setItem(49, getCraftConfirmItem(getMode(b)));
         });
 
         
@@ -148,7 +128,7 @@ public class BlackstoneStove extends MenuBlock {
             currentRecipe[7] = inv.getItem(BlackstoneStove.BOWL_SLOT);
 
             RecipeCollection<StoveRecipe> recipeCollection;
-            switch (this.mode) {
+            switch (getMode(b)) {
                 case Frying:
                     recipeCollection = WildernetherRecipes.RecipeCollections.BLACKSTONE_STOVE_FRYING;
                     break;
@@ -168,7 +148,7 @@ public class BlackstoneStove extends MenuBlock {
 
             ItemStack recipeOutput = recipeCollection.getOrNull(currentRecipe);
             if (recipeOutput == null) {
-                player.sendMessage(Theme.CUISINE.getColor() + "Invalid " + this.mode.toString().toLowerCase() + " recipe!");
+                player.sendMessage(Theme.CUISINE.getColor() + "Invalid " + getMode(b).toString().toLowerCase() + " recipe!");
                 return false;
             }
 
