@@ -65,7 +65,8 @@ public class GeneralUtil {
         return i;
     }
 
-    public static <T> @Nullable T pickRandomElementFromUnweightedList(T[] array) {
+    @Nullable
+    public static <T> T pickRandomElementFromUnweightedList(T[] array) {
         if (array.length < 1) {
             return null;
         }

@@ -10,6 +10,8 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
 
 import io.github.mooy1.infinitylib.core.AbstractAddon;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.BlobBuildUpdater;
+import me.schntgaispock.wildernether.integration.GastronomiconSetup;
 import me.schntgaispock.wildernether.integration.SlimeHUDSetup;
 import me.schntgaispock.wildernether.listeners.Listeners;
 import me.schntgaispock.wildernether.managers.ItemManager;
@@ -44,6 +46,15 @@ public class Wildernether extends AbstractAddon {
         getLogger().info("#=======================================#");
         getLogger().info("#    Wildernether - By SchnTgaiSpock    #");
         getLogger().info("#=======================================#");
+        
+        if (getConfig().getBoolean("options.auto-update")) {
+            if (getDescription().getVersion().startsWith("Dev - ")) {
+                new BlobBuildUpdater(this, getFile(), "Wildernether", "Dev").start();
+            } else {
+                getLogger().info("This is an unofficial build of Wildernether, so auto updates are disabled!");
+                getLogger().info("You can download the official build here: https://blob.build/project/Wildernether");
+            }
+        }
 
         ItemManager.setup();
         LootManager.setup();
@@ -60,6 +71,17 @@ public class Wildernether extends AbstractAddon {
             } catch (NoClassDefFoundError e) {
                 getLogger().warning("This server is using an old version of SlimeHUD that is incompatitable with this version of Wildernether.");
                 getLogger().warning("Please update SlimeHUD to version 1.2.0 or higher!");
+            }
+        }
+
+        if (getInstance().getServer().getPluginManager().isPluginEnabled("Gastronomicon")) {
+            try {
+                getLogger().info("Gastronomicon was found on this server!");
+                getLogger().info("Setting up Wildernether for Gastronomicon...");
+                GastronomiconSetup.setup();
+            } catch (NoClassDefFoundError e) {
+                getLogger().warning("This server is using an old version of Gastronomicon that is incompatitable with this version of Wildernether.");
+                getLogger().warning("Please update Gastronomicon to version 1.1.0 or higher!");
             }
         }
     }
